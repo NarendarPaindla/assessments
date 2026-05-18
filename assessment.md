@@ -262,26 +262,9 @@ Write a Python program to print the following pattern for a given input `n`.
 
 ---
 
-## Question 2: Count Even and Odd Numbers
-
-Write a Python program to count the number of **even and odd numbers in a list**.
-
-### Example Input:
-
-```python id="jlwmrw"
-[1, 2, 3, 4, 5, 6]
-```
-
-### Example Output:
-
-```text id="ww2hln"
-Even Count: 3
-Odd Count: 3
-```
-
 ---
 
-## Question 3: Second Largest Number
+## Question 2: Second Largest Number
 
 Write a Python function to find the **second largest number in a list**.
 
@@ -295,4 +278,32 @@ Write a Python function to find the **second largest number in a list**.
 
 ```text
 15
+```
+
+# Problem 3: Password Strength Checker (10 Marks)
+
+Write a Python function to validate password strength.
+
+### Password Rules:
+
+Must contain:
+
+* Minimum 8 characters
+* At least 1 uppercase letter
+* At least 1 lowercase letter
+* At least 1 digit
+* At least 1 special character
+
+### Example:
+
+```text
+Input: Hello@123
+
+Output:
+Strong Password
+
+Input: hello
+
+Output:
+Weak password
 ```
