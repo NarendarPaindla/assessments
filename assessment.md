@@ -262,20 +262,21 @@ Write a Python program to print the following pattern for a given input `n`.
 
 ---
 
-## Question 2: Prime Number Check
+## Question 2: Count Even and Odd Numbers
 
-Write a Python program to check whether a given number is **Prime Number or Not**.
+Write a Python program to count the number of **even and odd numbers in a list**.
 
 ### Example Input:
 
-```text
-7
+```python id="jlwmrw"
+[1, 2, 3, 4, 5, 6]
 ```
 
 ### Example Output:
 
-```text
-Prime
+```text id="ww2hln"
+Even Count: 3
+Odd Count: 3
 ```
 
 ---
