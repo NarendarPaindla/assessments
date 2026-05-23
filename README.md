@@ -5,35 +5,137 @@
 
 [test-3](https://forms.gle/7iSQ1bdE4a6ruwmN6)
 
+# REAL WORLD QUESTIONS
 
-# question
+---
 
-## Problem 14: Average of 5 Numbers
+## 📝 Question 1 — Income Tax Calculator
 
-### Problem Statement
+**Q: Write a Python program to calculate income tax based on annual salary:**
 
-Find average of 5 numbers.
+| Condition | Tax |
+|-----------|-----|
+| Salary > ₹15,00,000 | 30% tax |
+| Salary > ₹10,00,000 | 20% tax |
+| Salary > ₹5,00,000 | 10% tax |
+| Salary ≤ ₹5,00,000 | No tax |
 
-### Input Format
-
-Five integers
-
-### Output Format
-
-Average
-
-### Sample Input
-
-```text
-10
-20
-30
-40
-50
+**Sample Input:**
+```
+Enter your annual salary: 1200000
+```
+**Expected Output:**
+```
+--- Tax Summary ---
+Annual Salary : ₹1200000.00
+Tax Rate      : 20%  (₹240000.00)
+Net Salary    : ₹960000.00
 ```
 
-### Sample Output
+---
 
-```text
-30.0
+## 📝 Question 2 — Electricity Bill Calculator
+
+**Q: Write a Python program to calculate electricity bill based on units consumed:**
+
+| Units Consumed | Rate per Unit |
+|----------------|---------------|
+| Above 300 units | ₹6 per unit |
+| 201 – 300 units | ₹4 per unit |
+| 101 – 200 units | ₹3 per unit |
+| 0 – 100 units | ₹2 per unit |
+
+**Sample Input:**
 ```
+Enter units consumed: 250
+```
+**Expected Output:**
+```
+--- Electricity Bill ---
+Units Consumed : 250
+Rate Applied   : ₹4 per unit
+Total Bill     : ₹1000.00
+```
+
+---
+
+## 📝 Question 3 — Movie Ticket Pricing
+
+**Q: Write a Python program to calculate movie ticket price based on age:**
+
+| Condition | Ticket Price |
+|-----------|-------------|
+| Age < 5 | Free |
+| Age 5 – 12 | ₹100 |
+| Age 13 – 59 | ₹250 |
+| Age ≥ 60 | ₹150 (Senior discount) |
+
+**Sample Input:**
+```
+Enter your age: 65
+```
+**Expected Output:**
+```
+--- Ticket Booking ---
+Age          : 65
+Category     : Senior Citizen
+Ticket Price : ₹150.00
+```
+
+---
+
+## 📝 Question 4 — Employee Bonus Calculator
+
+**Q: Write a Python program to calculate employee bonus based on years of experience:**
+
+| Experience | Bonus |
+|------------|-------|
+| Above 10 years | 20% of salary |
+| 5 – 10 years | 15% of salary |
+| 2 – 5 years | 10% of salary |
+| Below 2 years | No bonus |
+
+**Sample Input:**
+```
+Enter salary      : 50000
+Enter experience  : 7
+```
+**Expected Output:**
+```
+--- Bonus Details ---
+Salary     : ₹50000.00
+Experience : 7 years
+Bonus      : 15%  (₹7500.00)
+Take Home  : ₹57500.00
+```
+
+---
+
+## 📝 Question 5 — Student Grade Calculator
+
+**Q: Write a Python program to assign grade based on marks obtained:**
+
+| Marks | Grade |
+|-------|-------|
+| ≥ 90 | A+ |
+| ≥ 80 | A |
+| ≥ 70 | B |
+| ≥ 60 | C |
+| ≥ 50 | D |
+| Below 50 | Fail |
+
+**Sample Input:**
+```
+Enter marks: 85
+```
+**Expected Output:**
+```
+--- Result ---
+Marks  : 85
+Grade  : A
+Result : Pass
+```
+
+---
+
+> 💡 All 5 questions use the **same concept** — `if`, `elif`, `else` with real-world scenarios. Try solving them one by one!
