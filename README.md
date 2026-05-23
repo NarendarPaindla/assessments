@@ -139,3 +139,70 @@ Result : Pass
 ---
 
 > 💡 All 5 questions use the **same concept** — `if`, `elif`, `else` with real-world scenarios. Try solving them one by one!
+
+
+## 📝 Question — ATM Withdrawal Eligibility Checker
+
+**Q: Write a Python program to check whether an ATM withdrawal is eligible based on the following conditions:**
+
+| Condition | Result |
+|-----------|--------|
+| PIN correct AND sufficient balance | Transaction Successful |
+| PIN correct BUT insufficient balance | Transaction Failed – Low Balance |
+| PIN wrong (1st & 2nd attempt) | Wrong PIN – Try Again |
+| PIN wrong (3rd attempt) | Card Blocked |
+
+---
+
+**Rules:**
+1. User has a **pre-set PIN** and **account balance**
+2. Allow maximum **3 PIN attempts**
+3. Check if withdrawal amount is **less than or equal to balance**
+4. Deduct amount and show **remaining balance** on success
+
+---
+
+**Sample Input:**
+```
+Welcome to the ATM
+Enter your PIN        : 1234
+Enter withdrawal amt  : 5000
+```
+
+**Expected Output — Case 1 (PIN correct + sufficient balance):**
+```
+--- Transaction Summary ---
+Status            : ✅ Transaction Successful
+Amount Withdrawn  : ₹5000.00
+Remaining Balance : ₹15000.00
+```
+
+**Expected Output — Case 2 (PIN correct + low balance):**
+```
+--- Transaction Summary ---
+Status  : ❌ Transaction Failed
+Reason  : Insufficient Balance
+Balance : ₹3000.00
+```
+
+**Expected Output — Case 3 (Wrong PIN):**
+```
+❌ Wrong PIN! Attempts remaining: 2
+```
+
+**Expected Output — Case 4 (3 wrong attempts):**
+```
+🔒 Your card has been blocked. Contact your bank.
+```
+
+---
+
+> 💡 **Hint:** Use:
+> - `if / elif / else` → to check PIN and balance conditions
+> - `for` loop → to allow 3 PIN attempts
+> - `break` → to exit loop on success or card block
+
+---`
+
+---
+
