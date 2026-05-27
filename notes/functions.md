@@ -69,6 +69,7 @@ You ordered a Medium pizza with Paneer
 
 ---
 
+===========================================================================================
 
 ---
 
@@ -563,21 +564,6 @@ Still works correctly.
 
 ---
 
-# Key Takeaways
-
-* **Arguments** are values passed to a function.
-* **Parameters/Formal Arguments** are variables in function definition.
-* **Actual Arguments** are real values passed during function call.
-* Python supports **4 types of arguments**:
-
-  1. Positional Arguments
-  2. Keyword Arguments
-  3. Default Arguments
-  4. Variable Length Arguments
-* In **Positional Arguments**, order matters.
-* In **Keyword Arguments**, order does not matter.
-* The **number of arguments should match** the number of parameters unless special techniques are used.
-* Keyword arguments make code **more readable and understandable** for developers and students.
 
 # Types of Arguments in Python (Continued)
 
@@ -1192,6 +1178,7 @@ They are stored in a **tuple**.
 
 * Use **Variable Length Arguments** when the number of inputs is unknown.
 
+===========================================================================================
 
 # Types of Variables in Python
 
@@ -1660,6 +1647,7 @@ NameError: name 'variable_name' is not defined
 * Use **Global Variables** when multiple functions need the same data.
 * Use **Local Variables** when data is needed only inside one function.
 
+=============================================================================================
 
 # `**kwargs` in Python (Keyword Variable Length Arguments)
 
