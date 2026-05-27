@@ -579,3 +579,471 @@ Still works correctly.
 * The **number of arguments should match** the number of parameters unless special techniques are used.
 * Keyword arguments make code **more readable and understandable** for developers and students.
 
+# Types of Variables in Python
+
+## What are Variables?
+
+A **variable** is a name used to store data in memory.
+
+Example:
+
+```python
+a = 10
+name = "Narendar"
+```
+
+Here:
+
+* `a` stores the value `10`
+* `name` stores the value `"Narendar"`
+
+---
+
+## Types of Variables in Python
+
+Python supports **2 types of variables**:
+
+1. Global Variables
+2. Local Variables
+
+---
+
+# 1) Global Variables
+
+## Definition
+
+Variables declared **outside a function** are called **Global Variables**.
+
+These variables can be accessed from **any function in the program (module)**.
+
+### Syntax
+
+```python
+a = 10   # Global Variable
+
+def f1():
+    print(a)
+
+def f2():
+    print(a)
+
+f1()
+f2()
+```
+
+### Output
+
+```text
+10
+10
+```
+
+---
+
+## Explanation
+
+### Step 1: Variable Creation
+
+```python
+a = 10
+```
+
+Since `a` is declared **outside** all functions, it becomes a **global variable**.
+
+---
+
+### Step 2: First Function
+
+```python
+def f1():
+    print(a)
+```
+
+Python searches for `a`.
+
+Since `a` is not inside `f1()`, Python checks outside the function and finds:
+
+```python
+a = 10
+```
+
+So output is:
+
+```text
+10
+```
+
+---
+
+### Step 3: Second Function
+
+```python
+def f2():
+    print(a)
+```
+
+Again, Python finds the same global variable.
+
+Output:
+
+```text
+10
+```
+
+---
+
+## Important Points About Global Variables
+
+### 1. Declared Outside Functions
+
+Global variables are always declared **outside** the function.
+
+Example:
+
+```python
+x = 100
+```
+
+---
+
+### 2. Accessible Everywhere
+
+They can be used inside multiple functions.
+
+Example:
+
+```python
+college = "GITAM"
+
+def student1():
+    print(college)
+
+def student2():
+    print(college)
+
+student1()
+student2()
+```
+
+### Output
+
+```text
+GITAM
+GITAM
+```
+
+---
+
+## Real-Life Analogy
+
+Think of a **Wi-Fi password in a college**.
+
+```text
+Wi-Fi Password = Global Variable
+
+Anyone in the college can use it
+(All departments can access it)
+```
+
+Similarly:
+
+```text
+Global Variable
+
+Accessible by all functions
+```
+
+---
+
+## Text Diagram
+
+```text
+Global Variable
+
+a = 10
+
+        ┌───────────┐
+        │  f1()     │ ───► Can Access
+        └───────────┘
+
+        ┌───────────┐
+        │  f2()     │ ───► Can Access
+        └───────────┘
+```
+
+---
+
+# 2) Local Variables
+
+## Definition
+
+Variables declared **inside a function** are called **Local Variables**.
+
+These variables are available **only inside that function**.
+
+We **cannot access them outside the function**.
+
+### Syntax
+
+```python
+def f1():
+    a = 10
+    print(a)   # Valid
+
+def f2():
+    print(a)   # Invalid
+
+f1()
+f2()
+```
+
+### Output
+
+```text
+10
+NameError: name 'a' is not defined
+```
+
+---
+
+## Explanation
+
+### Step 1: Local Variable Creation
+
+Inside `f1()`:
+
+```python
+a = 10
+```
+
+Since `a` is created **inside the function**, it becomes a **local variable**.
+
+---
+
+### Step 2: Access Inside Same Function
+
+```python
+print(a)
+```
+
+Inside `f1()`, `a` exists.
+
+So output:
+
+```text
+10
+```
+
+---
+
+### Step 3: Access From Another Function
+
+```python
+def f2():
+    print(a)
+```
+
+Here Python searches for `a`.
+
+But:
+
+* `a` is not inside `f2()`
+* `a` is not global
+
+So Python throws an error:
+
+```text
+NameError: name 'a' is not defined
+```
+
+---
+
+## Important Points About Local Variables
+
+### 1. Created Inside Functions
+
+Example:
+
+```python
+def demo():
+    x = 50
+```
+
+Here `x` is local.
+
+---
+
+### 2. Accessible Only in Same Function
+
+Correct Example:
+
+```python
+def show():
+    msg = "Hello"
+    print(msg)
+```
+
+Wrong Example:
+
+```python
+def show():
+    msg = "Hello"
+
+print(msg)
+```
+
+### Error
+
+```text
+NameError: name 'msg' is not defined
+```
+
+---
+
+## Real-Life Analogy
+
+Think of a **teacher's classroom marker**.
+
+```text
+Local Variable = Classroom Marker
+
+Only that classroom teacher can use it.
+Other classrooms cannot access it.
+```
+
+Similarly:
+
+```text
+Local Variable
+
+Accessible only inside that function
+```
+
+---
+
+## Text Diagram
+
+```text
+Local Variable
+
+def f1():
+    a = 10
+
+        ┌───────────┐
+        │  f1()     │ ───► Can Access
+        └───────────┘
+
+        ┌───────────┐
+        │  f2()     │ ───► Cannot Access
+        └───────────┘
+```
+
+---
+
+# Global Variable vs Local Variable
+
+| Feature                       | Global Variable        | Local Variable          |
+| ----------------------------- | ---------------------- | ----------------------- |
+| Declaration Place             | Outside function       | Inside function         |
+| Scope                         | Entire program/module  | Only inside function    |
+| Accessible in other functions | Yes                    | No                      |
+| Lifetime                      | Till program execution | Till function execution |
+
+---
+
+## Example Comparing Both
+
+```python
+x = 100   # Global Variable
+
+def test():
+    y = 50    # Local Variable
+    print(x)
+    print(y)
+
+test()
+
+print(x)
+print(y)
+```
+
+### Output
+
+```text
+100
+50
+100
+NameError: name 'y' is not defined
+```
+
+### Why Error?
+
+Because:
+
+```text
+x → Global → Accessible everywhere
+
+y → Local → Accessible only inside test()
+```
+
+---
+
+# Common Interview Questions
+
+### Q1: What is a Global Variable?
+
+**Answer:**
+A variable declared outside the function and accessible throughout the program is called a **Global Variable**.
+
+---
+
+### Q2: What is a Local Variable?
+
+**Answer:**
+A variable declared inside a function and accessible only within that function is called a **Local Variable**.
+
+---
+
+### Q3: Can a local variable be accessed outside a function?
+
+**Answer:**
+No. It will give a **NameError**.
+
+---
+
+### Q4: Which variable is accessible to all functions?
+
+**Answer:**
+**Global Variable**
+
+---
+
+# Key Takeaways
+
+* Python supports **2 types of variables**:
+
+  1. Global Variables
+  2. Local Variables
+
+* **Global Variables**
+
+  * Declared outside functions
+  * Accessible in all functions
+  * Available throughout the program
+
+* **Local Variables**
+
+  * Declared inside functions
+  * Accessible only within the same function
+  * Cannot be accessed outside
+
+* Trying to access a local variable outside its function gives:
+
+```text
+NameError: name 'variable_name' is not defined
+```
+
+* Use **Global Variables** when multiple functions need the same data.
+* Use **Local Variables** when data is needed only inside one function.
+
+
