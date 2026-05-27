@@ -579,6 +579,620 @@ Still works correctly.
 * The **number of arguments should match** the number of parameters unless special techniques are used.
 * Keyword arguments make code **more readable and understandable** for developers and students.
 
+# Types of Arguments in Python (Continued)
+
+Previously, we learned:
+
+1. Positional Arguments
+2. Keyword Arguments
+
+Now let us learn the remaining two types:
+
+3. Default Arguments
+4. Variable Length Arguments
+
+---
+
+# 3) Default Arguments
+
+## Definition
+
+A **Default Argument** is an argument that already has a value assigned in the function definition.
+
+If the user does not pass a value, Python uses the **default value automatically**.
+
+### Syntax
+
+```python
+def greet(name="Student"):
+    print("Hello", name)
+
+greet()
+greet("Ravi")
+```
+
+### Output
+
+```text
+Hello Student
+Hello Ravi
+```
+
+---
+
+## Explanation
+
+### Function Definition
+
+```python
+def greet(name="Student"):
+```
+
+Here:
+
+```text
+name = "Student"
+```
+
+is the **default value**.
+
+---
+
+### First Function Call
+
+```python
+greet()
+```
+
+No argument is passed.
+
+So Python automatically uses:
+
+```text
+name = "Student"
+```
+
+Output:
+
+```text
+Hello Student
+```
+
+---
+
+### Second Function Call
+
+```python
+greet("Ravi")
+```
+
+Now Python replaces the default value.
+
+Mapping:
+
+```text
+name = "Ravi"
+```
+
+Output:
+
+```text
+Hello Ravi
+```
+
+---
+
+## Example 2
+
+```python
+def power(base, exponent=2):
+    print(base ** exponent)
+
+power(5)
+power(5, 3)
+```
+
+### Output
+
+```text
+25
+125
+```
+
+### Explanation
+
+### First Call
+
+```python
+power(5)
+```
+
+Since exponent is not passed:
+
+```text
+exponent = 2
+```
+
+Calculation:
+
+```text
+5² = 25
+```
+
+---
+
+### Second Call
+
+```python
+power(5, 3)
+```
+
+Now:
+
+```text
+base = 5
+exponent = 3
+```
+
+Calculation:
+
+```text
+5³ = 125
+```
+
+---
+
+## Important Rules of Default Arguments
+
+### 1. Default value is used if no value is passed
+
+Example:
+
+```python
+def city(name="Hyderabad"):
+    print(name)
+
+city()
+```
+
+Output:
+
+```text
+Hyderabad
+```
+
+---
+
+### 2. Passed value overrides default value
+
+Example:
+
+```python
+city("Chennai")
+```
+
+Output:
+
+```text
+Chennai
+```
+
+---
+
+### 3. Default arguments should come after normal arguments
+
+Correct:
+
+```python
+def student(name, course="Python"):
+    print(name, course)
+```
+
+Wrong:
+
+```python
+def student(course="Python", name):
+    print(name, course)
+```
+
+This gives an error.
+
+---
+
+## Real-Life Analogy
+
+Think of a food order.
+
+```text
+Default Drink = Water
+```
+
+If customer does not mention a drink:
+
+```text
+Food → Biryani
+Drink → Water
+```
+
+If customer selects:
+
+```text
+Food → Biryani
+Drink → Coke
+```
+
+Then Coke replaces Water.
+
+Same concept in Python.
+
+---
+
+## Text Diagram
+
+```text
+Default Argument
+
+def greet(name="Student")
+
+      No Value Passed
+              │
+              ▼
+     Uses Default Value
+
+      Value Passed
+              │
+              ▼
+     Replaces Default Value
+```
+
+---
+
+# 4) Variable Length Arguments
+
+## Definition
+
+Sometimes we do not know **how many arguments** will be passed.
+
+In such cases, Python uses **Variable Length Arguments**.
+
+We use:
+
+```text
+*args
+```
+
+to accept multiple values.
+
+---
+
+## Why Variable Length Arguments?
+
+Normally:
+
+```python
+def add(a, b):
+    print(a + b)
+
+add(10, 20)
+```
+
+This accepts only **2 arguments**.
+
+Problem:
+
+```python
+add(10, 20, 30)
+```
+
+Error occurs.
+
+To solve this, Python provides:
+
+```text
+*args
+```
+
+---
+
+## Syntax
+
+```python
+def sum_numbers(*numbers):
+    print(numbers)
+
+sum_numbers(10, 20)
+sum_numbers(10, 20, 30, 40)
+```
+
+### Output
+
+```text
+(10, 20)
+(10, 20, 30, 40)
+```
+
+---
+
+## Explanation
+
+### Function Definition
+
+```python
+def sum_numbers(*numbers):
+```
+
+`*numbers` collects all values into a **tuple**.
+
+---
+
+### First Function Call
+
+```python
+sum_numbers(10, 20)
+```
+
+Python stores:
+
+```text
+numbers = (10, 20)
+```
+
+---
+
+### Second Function Call
+
+```python
+sum_numbers(10, 20, 30, 40)
+```
+
+Python stores:
+
+```text
+numbers = (10, 20, 30, 40)
+```
+
+---
+
+## Example 2: Addition Program
+
+```python
+def add(*nums):
+    total = 0
+
+    for i in nums:
+        total = total + i
+
+    print(total)
+
+add(10, 20)
+add(10, 20, 30)
+add(10, 20, 30, 40)
+```
+
+### Output
+
+```text
+30
+60
+100
+```
+
+---
+
+## Step-by-Step Explanation
+
+### First Call
+
+```python
+add(10, 20)
+```
+
+Stored as:
+
+```text
+nums = (10, 20)
+```
+
+Calculation:
+
+```text
+10 + 20 = 30
+```
+
+---
+
+### Second Call
+
+```python
+add(10, 20, 30)
+```
+
+Stored as:
+
+```text
+nums = (10, 20, 30)
+```
+
+Calculation:
+
+```text
+10 + 20 + 30 = 60
+```
+
+---
+
+### Third Call
+
+```python
+add(10, 20, 30, 40)
+```
+
+Stored as:
+
+```text
+nums = (10, 20, 30, 40)
+```
+
+Calculation:
+
+```text
+10 + 20 + 30 + 40 = 100
+```
+
+---
+
+## Important Rules of Variable Length Arguments
+
+### 1. We use `*` symbol
+
+Example:
+
+```python
+def demo(*x):
+    print(x)
+```
+
+---
+
+### 2. It stores values as a tuple
+
+Example:
+
+```python
+demo(1, 2, 3)
+```
+
+Stored as:
+
+```text
+x = (1, 2, 3)
+```
+
+---
+
+### 3. It accepts any number of arguments
+
+Example:
+
+```python
+demo()
+demo(10)
+demo(10, 20)
+demo(10, 20, 30)
+```
+
+All are valid.
+
+---
+
+## Real-Life Analogy
+
+Think of a school attendance register.
+
+Teacher does not know how many students will come today.
+
+```text
+Student1
+Student2
+Student3
+Student4
+...
+```
+
+Any number of students can attend.
+
+Similarly:
+
+```text
+*args accepts any number of values
+```
+
+---
+
+## Text Diagram
+
+```text
+Variable Length Argument
+
+add(10,20,30,40)
+
+            │
+            ▼
+
+      *nums collects all
+
+    nums = (10,20,30,40)
+```
+
+---
+
+# Comparison of All Argument Types
+
+| Argument Type             | Order Matters | Number of Arguments Fixed | Uses Parameter Name |
+| ------------------------- | ------------: | ------------------------: | ------------------: |
+| Positional Arguments      |           Yes |                       Yes |                  No |
+| Keyword Arguments         |            No |                       Yes |                 Yes |
+| Default Arguments         |            No |                     Fixed |            Optional |
+| Variable Length Arguments |            No |                        No |                  No |
+
+---
+
+# Common Interview Questions
+
+### Q1: What is a Default Argument?
+
+**Answer:**
+A default argument is an argument that already has a predefined value in the function definition.
+
+---
+
+### Q2: What happens if we do not pass a value to a default argument?
+
+**Answer:**
+Python automatically uses the default value.
+
+---
+
+### Q3: What is a Variable Length Argument?
+
+**Answer:**
+A variable length argument allows a function to accept multiple arguments using `*args`.
+
+---
+
+### Q4: In which data type are variable length arguments stored?
+
+**Answer:**
+They are stored in a **tuple**.
+
+---
+
+# Key Takeaways
+
+* Python supports **4 types of arguments**:
+
+  1. Positional Arguments
+  2. Keyword Arguments
+  3. Default Arguments
+  4. Variable Length Arguments
+
+* **Default Arguments**
+
+  * Have predefined values
+  * Used when no value is passed
+  * Passed value overrides default value
+
+* **Variable Length Arguments**
+
+  * Use `*args`
+  * Accept unlimited arguments
+  * Store values in a tuple
+
+* Use **Default Arguments** when common values repeat.
+
+* Use **Variable Length Arguments** when the number of inputs is unknown.
+
+
 # Types of Variables in Python
 
 ## What are Variables?
