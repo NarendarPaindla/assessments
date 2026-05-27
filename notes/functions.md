@@ -2714,5 +2714,544 @@ They are commonly used with:
 * No `return` statement is needed.
 * Lambda supports **only one expression**.
 
+============================================================
+
+# Higher-Order Functions in Python
+
+## Definition
+
+A **Higher-Order Function (HOF)** is a function that:
+
+1. **Takes another function as an argument**, OR
+2. **Returns a function as output**
+
+In simple words:
+
+```text id="z7d2mv"
+A function that works with another function
+is called a Higher-Order Function.
+```
+
+---
+
+## Why Higher-Order Functions?
+
+Normally, functions work with values.
+
+Example:
+
+```python id="vq24h1"
+def add(a, b):
+    return a + b
+
+print(add(10, 20))
+```
+
+Here:
+
+```text id="39m01n"
+10 and 20 are values
+```
+
+But Python also allows:
+
+```text id="4w4mq2"
+Passing functions as arguments
+```
+
+This creates more reusable and flexible code.
+
+---
+
+# Condition for Higher-Order Function
+
+A function becomes a **Higher-Order Function** if:
+
+### 1. Function Accepts Another Function
+
+OR
+
+### 2. Function Returns Another Function
+
+---
+
+# Type 1: Function as an Argument
+
+## Example 1
+
+```python id="zjlwm1"
+def square(x):
+    return x * x
+
+def cube(x):
+    return x * x * x
+
+def operation(fun, value):
+    return fun(value)
+
+print(operation(square, 5))
+print(operation(cube, 5))
+```
+
+### Output
+
+```text id="jlwm22"
+25
+125
+```
+
+---
+
+## Step-by-Step Explanation
+
+### Function Definitions
+
+```python id="jlwm33"
+def square(x):
+```
+
+Returns:
+
+```text id="jlwm44"
+x × x
+```
+
+---
+
+```python id="jlwm55"
+def cube(x):
+```
+
+Returns:
+
+```text id="jlwm66"
+x × x × x
+```
+
+---
+
+### Higher-Order Function
+
+```python id="jlwm77"
+def operation(fun, value):
+```
+
+Here:
+
+```text id="jlwm88"
+fun → Function parameter
+value → Normal value
+```
+
+---
+
+### First Call
+
+```python id="jlwm99"
+operation(square, 5)
+```
+
+Python stores:
+
+```text id="jlwm00"
+fun = square
+value = 5
+```
+
+Execution:
+
+```text id="jlwm11"
+square(5)
+
+5 × 5 = 25
+```
+
+Output:
+
+```text id="jlwm12"
+25
+```
+
+---
+
+### Second Call
+
+```python id="jlwm13"
+operation(cube, 5)
+```
+
+Python stores:
+
+```text id="jlwm14"
+fun = cube
+value = 5
+```
+
+Execution:
+
+```text id="jlwm15"
+cube(5)
+
+5 × 5 × 5 = 125
+```
+
+Output:
+
+```text id="jlwm16"
+125
+```
+
+---
+
+# Example 2: Calculator Operation
+
+```python id="jlwm17"
+def add(a, b):
+    return a + b
+
+def multiply(a, b):
+    return a * b
+
+def calculate(operation, x, y):
+    return operation(x, y)
+
+print(calculate(add, 10, 20))
+print(calculate(multiply, 10, 20))
+```
+
+### Output
+
+```text id="jlwm18"
+30
+200
+```
+
+---
+
+## Explanation
+
+### First Call
+
+```python id="jlwm19"
+calculate(add, 10, 20)
+```
+
+Python performs:
+
+```text id="jlwm20"
+add(10, 20)
+
+10 + 20 = 30
+```
+
+---
+
+### Second Call
+
+```python id="jlwm21"
+calculate(multiply, 10, 20)
+```
+
+Python performs:
+
+```text id="jlwm23"
+multiply(10, 20)
+
+10 × 20 = 200
+```
+
+---
+
+# Type 2: Returning a Function
+
+A Higher-Order Function can also **return another function**.
+
+## Example
+
+```python id="jlwm24"
+def outer():
+
+    def inner():
+        return "Hello Python"
+
+    return inner
+
+result = outer()
+
+print(result())
+```
+
+### Output
+
+```text id="jlwm25"
+Hello Python
+```
+
+---
+
+## Explanation
+
+### Outer Function Executes
+
+```python id="jlwm26"
+result = outer()
+```
+
+Python creates:
+
+```text id="jlwm27"
+inner()
+```
+
+and returns it.
+
+---
+
+### Calling Returned Function
+
+```python id="jlwm28"
+result()
+```
+
+Output:
+
+```text id="jlwm29"
+Hello Python
+```
+
+This is also a **Higher-Order Function** because:
+
+```text id="jlwm30"
+Function returned another function
+```
+
+---
+
+# Built-in Higher-Order Functions in Python
+
+Python provides several built-in Higher-Order Functions.
+
+Common ones are:
+
+1. `map()`
+2. `filter()`
+3. `sorted()`
+4. `reduce()`
+
+---
+
+## Example: `map()`
+
+```python id="jlwm31"
+numbers = [1, 2, 3, 4]
+
+result = list(map(lambda x: x*x, numbers))
+
+print(result)
+```
+
+### Output
+
+```text id="jlwm32"
+[1, 4, 9, 16]
+```
+
+Why HOF?
+
+Because:
+
+```text id="jlwm34"
+map() accepts lambda function
+as argument
+```
+
+---
+
+## Example: `filter()`
+
+```python id="jlwm35"
+numbers = [1, 2, 3, 4, 5, 6]
+
+result = list(filter(lambda x: x % 2 == 0, numbers))
+
+print(result)
+```
+
+### Output
+
+```text id="jlwm36"
+[2, 4, 6]
+```
+
+Why HOF?
+
+Because:
+
+```text id="jlwm37"
+filter() accepts function
+as parameter
+```
+
+---
+
+# Important Characteristics of Higher-Order Functions
+
+### 1. Functions Are Treated as Objects
+
+Python allows:
+
+```text id="jlwm38"
+Functions stored in variables
+Functions passed as arguments
+Functions returned from functions
+```
+
+---
+
+### 2. Improves Code Reusability
+
+Instead of writing separate logic:
+
+```text id="jlwm39"
+One Higher-Order Function
+can work with multiple functions
+```
+
+---
+
+### 3. Makes Code Flexible
+
+Example:
+
+```text id="jlwm40"
+Same calculate() function
+
+Works for:
+Addition
+Subtraction
+Multiplication
+Division
+```
+
+---
+
+# Text Diagram
+
+```text id="jlwm41"
+Higher-Order Function
+
+calculate(add, 10, 20)
+
+        │
+        ▼
+
+Passes function
+
+add(10,20)
+
+        │
+        ▼
+
+Output = 30
+```
+
+---
+
+# Real-Life Analogy
+
+Imagine a **remote control**.
+
+```text id="jlwm42"
+Remote = Higher-Order Function
+
+Buttons = Functions
+```
+
+Same remote can perform:
+
+```text id="jlwm43"
+TV ON
+Volume UP
+Channel Change
+```
+
+Similarly:
+
+```text id="jlwm44"
+Higher-Order Function works
+with multiple functions
+```
+
+---
+
+# Higher-Order Function vs Normal Function
+
+| Feature                      | Normal Function | Higher-Order Function |
+| ---------------------------- | --------------- | --------------------- |
+| Accepts function as argument | No              | Yes                   |
+| Returns function             | No              | Yes                   |
+| Flexibility                  | Less            | More                  |
+| Reusability                  | Limited         | High                  |
+
+---
+
+# Common Interview Questions
+
+### Q1: What is a Higher-Order Function?
+
+**Answer:**
+A Higher-Order Function is a function that takes another function as input or returns a function as output.
+
+---
+
+### Q2: Give examples of Higher-Order Functions.
+
+**Answer:**
+
+* `map()`
+* `filter()`
+* `reduce()`
+* `sorted()`
+
+---
+
+### Q3: Why are Higher-Order Functions used?
+
+**Answer:**
+They improve:
+
+* Code reusability
+* Flexibility
+* Clean coding
+
+---
+
+### Q4: Is `map()` a Higher-Order Function?
+
+**Answer:**
+Yes, because it accepts another function as argument.
+
+---
+
+# Key Takeaways
+
+* A **Higher-Order Function** works with other functions.
+* It either:
+
+  * Accepts a function as input
+  * Returns a function as output
+* Python treats functions like objects.
+* Built-in Higher-Order Functions:
+
+  * `map()`
+  * `filter()`
+  * `reduce()`
+  * `sorted()`
+* Higher-Order Functions improve:
+
+  * Reusability
+  * Flexibility
+  * Cleaner code
+
 
 
