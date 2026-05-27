@@ -2125,6 +2125,594 @@ def demo(*args, **kwargs):
 
 ---
 
+============================================================================
+
+# Lambda Functions in Python
+
+## Definition
+
+A **Lambda Function** is a small anonymous function in Python.
+
+It is a function **without a name** and is created using the `lambda` keyword.
+
+In simple words:
+
+```text id="qdbx9z"
+A lambda function is a short way
+to write a function in one line.
+```
+
+---
+
+## Why Lambda Functions?
+
+Normally, we create functions using `def`.
+
+Example:
+
+```python id="mo2xgj"
+def square(n):
+    return n * n
+
+print(square(5))
+```
+
+### Output
+
+```text id="p5ffkg"
+25
+```
+
+But for small operations, writing a complete function becomes lengthy.
+
+Python provides:
+
+```text id="o9y2n0"
+lambda
+```
+
+to write short functions in one line.
+
+---
+
+# Syntax of Lambda Function
+
+```python id="jcz1vr"
+lambda arguments : expression
+```
+
+### Components
+
+| Part         | Meaning                           |
+| ------------ | --------------------------------- |
+| `lambda`     | Keyword to create lambda function |
+| `arguments`  | Input values                      |
+| `expression` | Logic or operation                |
+
+---
+
+## Basic Example
+
+```python id="h5g9m3"
+square = lambda x: x * x
+
+print(square(5))
+```
+
+### Output
+
+```text id="l6l8mq"
+25
+```
+
+---
+
+## Step-by-Step Explanation
+
+### Lambda Creation
+
+```python id="d28d56"
+lambda x: x * x
+```
+
+Here:
+
+```text id="73jqha"
+x → Input
+
+x * x → Expression
+```
+
+Equivalent Normal Function:
+
+```python id="5r0gb8"
+def square(x):
+    return x * x
+```
+
+Both do the same work.
+
+---
+
+# Example 1: Addition
+
+### Using Normal Function
+
+```python id="zj0n6h"
+def add(a, b):
+    return a + b
+
+print(add(10, 20))
+```
+
+### Using Lambda Function
+
+```python id="a0w5gm"
+add = lambda a, b: a + b
+
+print(add(10, 20))
+```
+
+### Output
+
+```text id="sivz9j"
+30
+```
+
+---
+
+## Explanation
+
+```python id="w77oym"
+lambda a, b: a + b
+```
+
+Meaning:
+
+```text id="8g3n1v"
+Take a and b
+
+Return a + b
+```
+
+---
+
+# Example 2: Even or Odd
+
+```python id="0mjlwm"
+check = lambda n: "Even" if n % 2 == 0 else "Odd"
+
+print(check(8))
+print(check(7))
+```
+
+### Output
+
+```text id="87gxru"
+Even
+Odd
+```
+
+---
+
+## Explanation
+
+Condition:
+
+```python id="jvkk2v"
+n % 2 == 0
+```
+
+If true:
+
+```text id="vjlwmh"
+Even
+```
+
+Else:
+
+```text id="n7vmdn"
+Odd
+```
+
+---
+
+# Example 3: Largest Number
+
+```python id="grb0px"
+largest = lambda a, b: a if a > b else b
+
+print(largest(50, 100))
+```
+
+### Output
+
+```text id="txhmn9"
+100
+```
+
+---
+
+## Explanation
+
+Condition:
+
+```python id="3b9vij"
+a > b
+```
+
+If true:
+
+```text id="mjlwm6"
+return a
+```
+
+Otherwise:
+
+```text id="3tz9r4"
+return b
+```
+
+---
+
+# Multiple Arguments in Lambda
+
+Lambda can take multiple arguments.
+
+Example:
+
+```python id="m6gnwz"
+multiply = lambda a, b, c: a * b * c
+
+print(multiply(2, 3, 4))
+```
+
+### Output
+
+```text id="1c8d2w"
+24
+```
+
+Calculation:
+
+```text id="azqk4g"
+2 × 3 × 4 = 24
+```
+
+---
+
+# No Arguments in Lambda
+
+Lambda can also work without arguments.
+
+Example:
+
+```python id="9u4e3p"
+greet = lambda: "Welcome to Python"
+
+print(greet())
+```
+
+### Output
+
+```text id="vjlwm0"
+Welcome to Python
+```
+
+---
+
+# Lambda with `map()`
+
+## Definition
+
+`map()` applies a function to every item in a sequence.
+
+Example:
+
+```python id="1v08a2"
+numbers = [1, 2, 3, 4]
+
+square = list(map(lambda x: x * x, numbers))
+
+print(square)
+```
+
+### Output
+
+```text id="9ff0lk"
+[1, 4, 9, 16]
+```
+
+---
+
+## Explanation
+
+Lambda runs on every element:
+
+```text id="vovjlwm"
+1 → 1×1 = 1
+2 → 2×2 = 4
+3 → 3×3 = 9
+4 → 4×4 = 16
+```
+
+---
+
+# Lambda with `filter()`
+
+## Definition
+
+`filter()` selects elements based on a condition.
+
+Example:
+
+```python id="18e2u9"
+numbers = [1, 2, 3, 4, 5, 6]
+
+even = list(filter(lambda x: x % 2 == 0, numbers))
+
+print(even)
+```
+
+### Output
+
+```text id="lbjlwm"
+[2, 4, 6]
+```
+
+---
+
+## Explanation
+
+Condition:
+
+```python id="rxtqzc"
+x % 2 == 0
+```
+
+Check each number:
+
+```text id="7a1h0x"
+1 → False
+
+2 → True
+
+3 → False
+
+4 → True
+
+5 → False
+
+6 → True
+```
+
+Selected values:
+
+```text id="jlwm9m"
+[2, 4, 6]
+```
+
+---
+
+# Lambda with `sorted()`
+
+Example:
+
+```python id="fjlwm4"
+students = [
+    ("Ram", 70),
+    ("Amit", 90),
+    ("Kiran", 80)
+]
+
+result = sorted(students, key=lambda x: x[1])
+
+print(result)
+```
+
+### Output
+
+```text id="jlwmzb"
+[
+ ('Ram', 70),
+ ('Kiran', 80),
+ ('Amit', 90)
+]
+```
+
+---
+
+## Explanation
+
+Lambda:
+
+```python id="jlwmm0"
+lambda x: x[1]
+```
+
+means:
+
+```text id="jlwmg7"
+Sort based on second value
+(marks)
+```
+
+Sorted order:
+
+```text id="jjlwm0"
+70 → 80 → 90
+```
+
+---
+
+# Important Rules of Lambda Functions
+
+### 1. Lambda has no name
+
+Example:
+
+```python id="jlwm0y"
+lambda x: x + 10
+```
+
+Anonymous function.
+
+---
+
+### 2. Lambda contains only one expression
+
+Correct:
+
+```python id="jlwmz1"
+lambda x: x * x
+```
+
+Wrong:
+
+```python id="jlwm4m"
+lambda x:
+    x = x + 1
+    return x
+```
+
+Not allowed.
+
+---
+
+### 3. No `return` keyword
+
+Wrong:
+
+```python id="jlwmn8"
+lambda x: return x * x
+```
+
+Correct:
+
+```python id="wjgl0w"
+lambda x: x * x
+```
+
+Lambda automatically returns the result.
+
+---
+
+### 4. Best for Small Functions
+
+Good:
+
+```python id="jlwmhy"
+lambda x: x + 5
+```
+
+Not good for large logic.
+
+---
+
+# Lambda vs Normal Function
+
+| Feature               | Normal Function | Lambda Function  |
+| --------------------- | --------------- | ---------------- |
+| Keyword Used          | `def`           | `lambda`         |
+| Function Name         | Required        | Optional         |
+| Number of Expressions | Multiple        | One              |
+| Return Keyword        | Required        | Not Required     |
+| Best For              | Large Logic     | Small Operations |
+
+---
+
+## Text Diagram
+
+```text id="jlwmws"
+Normal Function
+
+def square(x):
+    return x*x
+```
+
+```text id="jlwm2t"
+Lambda Function
+
+lambda x: x*x
+```
+
+Both do same work.
+
+---
+
+# Real-Life Analogy
+
+Imagine a calculator.
+
+For simple calculations:
+
+```text id="0jlwmf"
+2 + 3
+5 × 5
+```
+
+You do not write steps.
+
+You directly calculate.
+
+Similarly:
+
+```text id="tjlwm0"
+Lambda = Quick One-Line Function
+```
+
+---
+
+# Common Interview Questions
+
+### Q1: What is a Lambda Function?
+
+**Answer:**
+A lambda function is an anonymous function written in one line using the `lambda` keyword.
+
+---
+
+### Q2: Why use Lambda Functions?
+
+**Answer:**
+Lambda functions are used for small and quick operations.
+
+---
+
+### Q3: Can lambda contain multiple statements?
+
+**Answer:**
+No. Lambda supports only one expression.
+
+---
+
+### Q4: Does lambda require `return` keyword?
+
+**Answer:**
+No. Lambda automatically returns the result.
+
+---
+
+### Q5: Where are lambda functions commonly used?
+
+**Answer:**
+They are commonly used with:
+
+* `map()`
+* `filter()`
+* `sorted()`
+* `reduce()`
+
+---
+
+# Key Takeaways
+
+* Lambda is an **anonymous function**.
+* Created using the `lambda` keyword.
+* Used for **small one-line operations**.
+* No function name is required.
+* No `return` statement is needed.
+* Lambda supports **only one expression**.
 
 
 
