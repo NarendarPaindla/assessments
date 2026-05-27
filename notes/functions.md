@@ -201,3 +201,381 @@ Output:
 | **Recursive** | `def factorial()` | Problems with repetition |
 
 ---
+
+# Types of Arguments in Python
+
+## What are Arguments?
+
+Arguments are values passed to a function when calling it.
+
+Example:
+
+```python
+def f1(a, b):
+    print(a + b)
+
+f1(10, 20)
+```
+
+### Understanding the Terms
+
+| Term                          | Meaning                               | Example    |
+| ----------------------------- | ------------------------------------- | ---------- |
+| Formal Arguments (Parameters) | Variables used in function definition | `a`, `b`   |
+| Actual Arguments              | Real values passed to function        | `10`, `20` |
+
+In the above example:
+
+* `a` and `b` are **formal arguments (parameters)**
+* `10` and `20` are **actual arguments**
+
+### Real-Life Analogy
+
+Think of a function like ordering food in a restaurant.
+
+```text
+Function = Restaurant Order Form
+Parameters = Empty food slots
+Arguments = Actual food items you order
+```
+
+Example:
+
+```python
+def order(food, drink):
+    print(food, drink)
+
+order("Burger", "Coke")
+```
+
+Here:
+
+* `food`, `drink` → Parameters
+* `"Burger"`, `"Coke"` → Arguments
+
+---
+
+## Types of Arguments in Python
+
+Python allows **4 types of arguments**:
+
+1. Positional Arguments
+2. Keyword Arguments
+3. Default Arguments
+4. Variable Length Arguments
+
+---
+
+# 1) Positional Arguments
+
+## Definition
+
+These are arguments passed to a function **in the correct order (position)**.
+
+The position matters.
+
+### Syntax
+
+```python
+def sub(a, b):
+    print(a - b)
+
+sub(100, 200)
+sub(200, 100)
+```
+
+### Output
+
+```text
+-100
+100
+```
+
+## Explanation
+
+### First Function Call
+
+```python
+sub(100, 200)
+```
+
+Mapping:
+
+```text
+a = 100
+b = 200
+```
+
+Calculation:
+
+```text
+100 - 200 = -100
+```
+
+---
+
+### Second Function Call
+
+```python
+sub(200, 100)
+```
+
+Mapping:
+
+```text
+a = 200
+b = 100
+```
+
+Calculation:
+
+```text
+200 - 100 = 100
+```
+
+### Important Rules
+
+1. **Order must match**
+
+   * Arguments should be passed in the correct position.
+
+2. **Changing position changes output**
+
+Example:
+
+```python
+sub(10, 5)   # Output: 5
+sub(5, 10)   # Output: -5
+```
+
+3. **Number of arguments must match**
+
+Wrong Example:
+
+```python
+def add(a, b):
+    print(a + b)
+
+add(10)
+```
+
+### Error
+
+```text
+TypeError: missing 1 required positional argument
+```
+
+---
+
+### Real-Life Analogy
+
+Imagine a train reservation form:
+
+```text
+Passenger Name → First box
+Age → Second box
+```
+
+Correct:
+
+```text
+("Narendar", 23)
+```
+
+Wrong order:
+
+```text
+(23, "Narendar")
+```
+
+This creates confusion because the position matters.
+
+---
+
+# 2) Keyword Arguments
+
+## Definition
+
+We can pass argument values using **parameter names (keywords)**.
+
+In keyword arguments, **order does not matter**.
+
+### Syntax
+
+```python
+def wish(name, msg):
+    print("Hello", name, msg)
+
+wish(name="Durga", msg="Good Morning")
+wish(msg="Good Morning", name="Durga")
+```
+
+### Output
+
+```text
+Hello Durga Good Morning
+Hello Durga Good Morning
+```
+
+## Explanation
+
+### First Call
+
+```python
+wish(name="Durga", msg="Good Morning")
+```
+
+Mapping:
+
+```text
+name = "Durga"
+msg = "Good Morning"
+```
+
+Output:
+
+```text
+Hello Durga Good Morning
+```
+
+---
+
+### Second Call
+
+```python
+wish(msg="Good Morning", name="Durga")
+```
+
+Even though the order changed:
+
+```text
+msg first
+name second
+```
+
+Python understands using keyword names.
+
+So output remains the same.
+
+---
+
+## Why Use Keyword Arguments?
+
+Keyword arguments improve:
+
+* Readability
+* Flexibility
+* Code clarity
+
+Example:
+
+Without keyword arguments:
+
+```python
+student("Narendar", 81.8, "CSE")
+```
+
+Hard to understand what each value means.
+
+With keyword arguments:
+
+```python
+student(
+    name="Narendar",
+    percentage=81.8,
+    branch="CSE"
+)
+```
+
+Much clearer.
+
+---
+
+## Positional vs Keyword Arguments
+
+| Feature                 | Positional Arguments | Keyword Arguments |
+| ----------------------- | -------------------- | ----------------- |
+| Order matters           | Yes                  | No                |
+| Parameter name required | No                   | Yes               |
+| Readability             | Less                 | More              |
+| Flexible                | No                   | Yes               |
+
+---
+
+## Text Diagram
+
+```text
+Positional Arguments
+
+sub(100, 200)
+
+a = 100
+b = 200
+
+Position matters
+```
+
+```text
+Keyword Arguments
+
+wish(name="Durga", msg="Good Morning")
+
+name = Durga
+msg = Good Morning
+
+Position does not matter
+```
+
+---
+
+# Common Interview Question
+
+### Q1: What happens if positional arguments are passed in the wrong order?
+
+Answer:
+The output changes because values are assigned based on position.
+
+Example:
+
+```python
+def div(a, b):
+    print(a / b)
+
+div(10, 2)   # Output: 5.0
+div(2, 10)   # Output: 0.2
+```
+
+---
+
+### Q2: Can we change the order in keyword arguments?
+
+Answer:
+
+Yes, because values are assigned using parameter names.
+
+Example:
+
+```python
+wish(msg="Hi", name="Ravi")
+```
+
+Still works correctly.
+
+---
+
+# Key Takeaways
+
+* **Arguments** are values passed to a function.
+* **Parameters/Formal Arguments** are variables in function definition.
+* **Actual Arguments** are real values passed during function call.
+* Python supports **4 types of arguments**:
+
+  1. Positional Arguments
+  2. Keyword Arguments
+  3. Default Arguments
+  4. Variable Length Arguments
+* In **Positional Arguments**, order matters.
+* In **Keyword Arguments**, order does not matter.
+* The **number of arguments should match** the number of parameters unless special techniques are used.
+* Keyword arguments make code **more readable and understandable** for developers and students.
+
