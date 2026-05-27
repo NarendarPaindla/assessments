@@ -1661,3 +1661,482 @@ NameError: name 'variable_name' is not defined
 * Use **Local Variables** when data is needed only inside one function.
 
 
+# `**kwargs` in Python (Keyword Variable Length Arguments)
+
+## Definition
+
+`**kwargs` is used when we do not know **how many keyword arguments** will be passed to a function.
+
+It allows a function to accept **multiple keyword arguments dynamically**.
+
+`kwargs` stands for:
+
+```text
+Keyword Arguments
+```
+
+The `**` symbol is mandatory.
+
+---
+
+## Why `**kwargs`?
+
+Normally:
+
+```python
+def student(name, course):
+    print(name, course)
+
+student("Rahul", "Python")
+```
+
+This function accepts only **fixed arguments**.
+
+Problem:
+
+```python
+student(name="Rahul", course="Python", city="Hyderabad")
+```
+
+This gives an error because extra arguments are not allowed.
+
+To solve this problem, Python provides:
+
+```text
+**kwargs
+```
+
+---
+
+## Syntax
+
+```python
+def details(**data):
+    print(data)
+
+details(name="Rahul", city="Delhi")
+```
+
+### Output
+
+```text
+{'name': 'Rahul', 'city': 'Delhi'}
+```
+
+---
+
+## Explanation
+
+### Function Definition
+
+```python
+def details(**data):
+```
+
+Here:
+
+```text
+**data
+```
+
+collects all keyword arguments.
+
+Python stores them as a **dictionary**.
+
+---
+
+### Function Call
+
+```python
+details(name="Rahul", city="Delhi")
+```
+
+Python stores:
+
+```text
+data = {
+    'name': 'Rahul',
+    'city': 'Delhi'
+}
+```
+
+Output:
+
+```text
+{'name': 'Rahul', 'city': 'Delhi'}
+```
+
+---
+
+# Example 1: Student Details
+
+```python
+def student_info(**student):
+    print(student)
+
+student_info(
+    name="Aman",
+    course="Python",
+    city="Mumbai"
+)
+```
+
+### Output
+
+```text
+{
+ 'name': 'Aman',
+ 'course': 'Python',
+ 'city': 'Mumbai'
+}
+```
+
+---
+
+## Step-by-Step Explanation
+
+Python stores values like this:
+
+```text
+student = {
+   'name': 'Aman',
+   'course': 'Python',
+   'city': 'Mumbai'
+}
+```
+
+Since it is a dictionary:
+
+* Keys → parameter names
+* Values → actual values
+
+---
+
+# Example 2: Printing Keys and Values
+
+```python
+def employee_details(**emp):
+
+    for key, value in emp.items():
+        print(key, ":", value)
+
+employee_details(
+    name="Suresh",
+    department="IT",
+    salary=50000
+)
+```
+
+### Output
+
+```text
+name : Suresh
+department : IT
+salary : 50000
+```
+
+---
+
+## Explanation
+
+### Stored as Dictionary
+
+```text
+emp = {
+   'name': 'Suresh',
+   'department': 'IT',
+   'salary': 50000
+}
+```
+
+### Loop Working
+
+```python
+for key, value in emp.items():
+```
+
+This accesses:
+
+```text
+Key → Value
+```
+
+Example:
+
+```text
+name → Suresh
+department → IT
+salary → 50000
+```
+
+---
+
+# Example 3: Passing Any Number of Keyword Arguments
+
+```python
+def profile(**info):
+    print(info)
+
+profile()
+
+profile(name="Kiran")
+
+profile(
+    name="Priya",
+    city="Chennai",
+    profession="Teacher"
+)
+```
+
+### Output
+
+```text
+{}
+{'name': 'Kiran'}
+{
+ 'name': 'Priya',
+ 'city': 'Chennai',
+ 'profession': 'Teacher'
+}
+```
+
+---
+
+## Important Rules of `**kwargs`
+
+### 1. Uses Double Asterisk `**`
+
+Correct:
+
+```python
+def demo(**x):
+    print(x)
+```
+
+Wrong:
+
+```python
+def demo(*x):
+    print(x)
+```
+
+Because `*x` is for positional variable arguments.
+
+---
+
+### 2. Stores Data as Dictionary
+
+Example:
+
+```python
+def show(**data):
+    print(type(data))
+
+show(a=10, b=20)
+```
+
+### Output
+
+```text
+<class 'dict'>
+```
+
+So:
+
+```text
+**kwargs → Dictionary
+```
+
+---
+
+### 3. Accepts Unlimited Keyword Arguments
+
+Example:
+
+```python
+def demo(**x):
+    print(x)
+
+demo()
+demo(a=10)
+demo(a=10, b=20)
+demo(a=10, b=20, c=30)
+```
+
+All are valid.
+
+---
+
+### 4. Keys Must Be Unique
+
+Wrong Example:
+
+```python
+demo(name="Rahul", name="Ravi")
+```
+
+This gives an error because dictionary keys cannot repeat.
+
+---
+
+# Difference Between `*args` and `**kwargs`
+
+| Feature           | `*args`                   | `**kwargs`                        |
+| ----------------- | ------------------------- | --------------------------------- |
+| Full Form         | Variable Length Arguments | Keyword Variable Length Arguments |
+| Stores Data As    | Tuple                     | Dictionary                        |
+| Type of Arguments | Positional                | Keyword                           |
+| Symbol Used       | `*`                       | `**`                              |
+
+---
+
+## Example Comparing Both
+
+```python
+def demo(*args, **kwargs):
+    print(args)
+    print(kwargs)
+
+demo(
+    10,
+    20,
+    30,
+    name="Ravi",
+    city="Hyderabad"
+)
+```
+
+### Output
+
+```text
+(10, 20, 30)
+
+{
+ 'name': 'Ravi',
+ 'city': 'Hyderabad'
+}
+```
+
+### Explanation
+
+Python stores:
+
+```text
+args = (10, 20, 30)
+```
+
+Tuple because positional arguments.
+
+And:
+
+```text
+kwargs = {
+   'name': 'Ravi',
+   'city': 'Hyderabad'
+}
+```
+
+Dictionary because keyword arguments.
+
+---
+
+## Real-Life Analogy
+
+Imagine a **job application form**.
+
+Some fields are fixed:
+
+```text
+Name
+Age
+Department
+```
+
+But sometimes extra details may come:
+
+```text
+Skills
+Experience
+City
+Salary Expectation
+```
+
+Since we don't know what extra fields users provide:
+
+```text
+**kwargs handles dynamic keyword data
+```
+
+---
+
+## Text Diagram
+
+```text
+Function Call
+
+employee(
+   name="Ravi",
+   salary=50000,
+   city="Delhi"
+)
+
+          │
+          ▼
+
+     **kwargs collects
+
+{
+ 'name': 'Ravi',
+ 'salary': 50000,
+ 'city': 'Delhi'
+}
+```
+
+---
+
+# Common Interview Questions
+
+### Q1: What is `**kwargs`?
+
+**Answer:**
+`**kwargs` allows a function to accept any number of keyword arguments.
+
+---
+
+### Q2: In which datatype are `**kwargs` stored?
+
+**Answer:**
+They are stored as a **dictionary**.
+
+---
+
+### Q3: What is the difference between `*args` and `**kwargs`?
+
+**Answer:**
+
+```text
+*args   → Tuple → Positional arguments
+
+**kwargs → Dictionary → Keyword arguments
+```
+
+---
+
+### Q4: Can we use `*args` and `**kwargs` together?
+
+**Answer:**
+Yes.
+
+Example:
+
+```python
+def demo(*args, **kwargs):
+    print(args)
+    print(kwargs)
+```
+
+---
+
+
+
+
