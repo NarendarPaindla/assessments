@@ -379,13 +379,13 @@ Age → Second box
 Correct:
 
 ```text
-("Narendar", 23)
+("rohit", 43)
 ```
 
 Wrong order:
 
 ```text
-(23, "Narendar")
+(43, "rohit")
 ```
 
 This creates confusion because the position matters.
@@ -472,7 +472,7 @@ Example:
 Without keyword arguments:
 
 ```python
-student("Narendar", 81.8, "CSE")
+student("rohit", 81.8, "CSE")
 ```
 
 Hard to understand what each value means.
@@ -481,7 +481,7 @@ With keyword arguments:
 
 ```python
 student(
-    name="Narendar",
+    name="rohit",
     percentage=81.8,
     branch="CSE"
 )
