@@ -68,3 +68,136 @@ You ordered a Medium pizza with Paneer
 - **Debugging**: Easier to find and fix errors.
 
 ---
+
+
+---
+
+## 🔑 Types of Functions in Python
+
+### 1. **Built-in Functions**
+These are already provided by Python. You don’t need to write them yourself.
+
+Example:
+```python
+print("Hello World")   # prints text
+len("Python")          # gives length of string
+max(10, 20, 30)        # finds maximum number
+```
+
+Output:
+```
+Hello World
+6
+30
+```
+
+---
+
+### 2. **User-defined Functions**
+These are functions you create yourself to perform specific tasks.
+
+Example:
+```python
+def greet(name):
+    print("Hello", name)
+
+greet("Rahul")
+greet("Anita")
+```
+
+Output:
+```
+Hello Rahul
+Hello Anita
+```
+
+---
+
+### 3. **Functions with Parameters**
+These take inputs (arguments) to work with.
+
+Example:
+```python
+def add_numbers(a, b):
+    print("Sum is:", a + b)
+
+add_numbers(5, 3)
+add_numbers(10, 20)
+```
+
+Output:
+```
+Sum is: 8
+Sum is: 30
+```
+
+---
+
+### 4. **Functions with Return Values**
+Instead of just printing, they return a result that can be stored or used later.
+
+Example:
+```python
+def multiply(a, b):
+    return a * b
+
+result = multiply(4, 5)
+print("Result is:", result)
+```
+
+Output:
+```
+Result is: 20
+```
+
+---
+
+### 5. **Lambda Functions**
+These are small, anonymous functions written in one line.
+
+Example:
+```python
+square = lambda x: x * x
+print(square(6))
+```
+
+Output:
+```
+36
+```
+
+---
+
+### 6. **Recursive Functions**
+A function that calls itself to solve problems like factorial or Fibonacci.
+
+Example (factorial):
+```python
+def factorial(n):
+    if n == 1:
+        return 1
+    else:
+        return n * factorial(n-1)
+
+print(factorial(5))
+```
+
+Output:
+```
+120
+```
+
+---
+
+## 📊 Summary Table
+
+| **Type of Function** | **Example** | **Use Case** |
+|-----------------------|-------------|--------------|
+| **Built-in** | `print()`, `len()` | Ready-made tools |
+| **User-defined** | `def greet()` | Custom tasks |
+| **With Parameters** | `def add(a,b)` | Input flexibility |
+| **With Return** | `def multiply()` | Store/use results |
+| **Lambda** | `lambda x: x*x` | Quick one-liners |
+| **Recursive** | `def factorial()` | Problems with repetition |
+
+---
