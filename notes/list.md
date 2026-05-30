@@ -583,3 +583,594 @@ list[start:stop:step]
 ```text
 IndexError: list index out of range
 ```
+# List vs Mutability
+
+## What is Mutability?
+
+Once a **List object is created**, we can **modify (change) its content**.
+
+Hence:
+
+```text id="b1q7md"
+Lists are Mutable
+```
+
+This means:
+
+* We can change elements
+* Add elements
+* Remove elements
+
+---
+
+## Example Program
+
+```python id="p9w2mk"
+numbers = [10, 20, 30, 40]
+
+print(numbers)
+
+numbers[1] = 777
+
+print(numbers)
+```
+
+### Output
+
+```text id="j7v5xt"
+[10, 20, 30, 40]
+
+[10, 777, 30, 40]
+```
+
+---
+
+## Step-by-Step Explanation
+
+### Original List
+
+```python id="h2z8kp"
+numbers = [10, 20, 30, 40]
+```
+
+List contains:
+
+```text id="v4x1mz"
+10
+20
+30
+40
+```
+
+---
+
+### Modify Element
+
+```python id="r8m6qw"
+numbers[1] = 777
+```
+
+Index:
+
+```text id="d9t2yw"
+1
+```
+
+contains:
+
+```text id="t1q5xc"
+20
+```
+
+It gets replaced with:
+
+```text id="m8p2vr"
+777
+```
+
+Updated list:
+
+```text id="g4w9ks"
+[10, 777, 30, 40]
+```
+
+---
+
+## Text Diagram
+
+```text id="x5r7qt"
+Before Change
+
+Index:    0    1    2    3
+         ------------------
+List =   10   20   30   40
+         ------------------
+```
+
+```text id="f3m8zw"
+After Change
+
+Index:    0    1    2    3
+         -------------------
+List =   10  777   30   40
+         -------------------
+```
+
+---
+
+# Traversing the Elements of List
+
+## Definition
+
+The **sequential access of each element in a list** is called:
+
+```text id="z8n2qm"
+Traversal
+```
+
+We can traverse a list using:
+
+1. `while` loop
+2. `for` loop
+
+---
+
+# 1) Traversing List Using `while` Loop
+
+## Example Program
+
+```python id="n6x1pt"
+numbers = [0,1,2,3,4,5,6,7,8,9,10]
+
+i = 0
+
+while i < len(numbers):
+    print(numbers[i])
+    i = i + 1
+```
+
+### Output
+
+```text id="q2m9rv"
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+```
+
+---
+
+## Step-by-Step Explanation
+
+### List Creation
+
+```python id="c5p8xy"
+numbers = [0,1,2,3,4,5,6,7,8,9,10]
+```
+
+---
+
+### Variable Initialization
+
+```python id="t7m2wk"
+i = 0
+```
+
+Traversal starts from:
+
+```text id="g1v9pl"
+index 0
+```
+
+---
+
+### While Condition
+
+```python id="h4x8zs"
+while i < len(numbers)
+```
+
+Meaning:
+
+```text id="u6r2qm"
+Run loop until
+i becomes list length
+```
+
+---
+
+### Accessing Elements
+
+```python id="w9m4kx"
+numbers[i]
+```
+
+Python prints elements one by one.
+
+---
+
+### Increment
+
+```python id="y2p7vc"
+i = i + 1
+```
+
+Moves to next index.
+
+---
+
+# 2) Traversing List Using `for` Loop
+
+## Example Program
+
+```python id="k5x2rt"
+numbers = [0,1,2,3,4,5,6,7,8,9,10]
+
+for value in numbers:
+    print(value)
+```
+
+### Output
+
+```text id="x4q8mz"
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+```
+
+---
+
+## Explanation
+
+`for` loop directly accesses elements.
+
+Instead of index:
+
+```text id="r8v2pl"
+value gets each element
+one by one
+```
+
+First iteration:
+
+```text id="m1x9qt"
+value = 0
+```
+
+Second iteration:
+
+```text id="k7w5rv"
+value = 1
+```
+
+And continues till end.
+
+---
+
+## `while` Loop vs `for` Loop
+
+| Feature       | `while` Loop      | `for` Loop       |
+| ------------- | ----------------- | ---------------- |
+| Uses Index    | Yes               | No               |
+| Easy to Write | No                | Yes              |
+| Best For      | Index-based logic | Direct Traversal |
+
+---
+
+# 3) Display Only Even Numbers
+
+## Example Program
+
+```python id="v8r2kx"
+numbers = [0,1,2,3,4,5,6,7,8,9,10]
+
+for value in numbers:
+
+    if value % 2 == 0:
+        print(value)
+```
+
+### Output
+
+```text id="c9w1pm"
+0
+2
+4
+6
+8
+10
+```
+
+---
+
+## Step-by-Step Explanation
+
+Condition:
+
+```python id="g2x7rv"
+value % 2 == 0
+```
+
+Means:
+
+```text id="u5p8mq"
+Even number
+```
+
+Python checks:
+
+```text id="t1m9vx"
+0 → Even
+
+1 → Odd
+
+2 → Even
+
+3 → Odd
+```
+
+Only even numbers printed.
+
+---
+
+# 4) Display Elements Index Wise
+
+## Example Program
+
+```python id="j6r2qt"
+letters = ["X", "Y", "Z"]
+
+x = len(letters)
+
+for i in range(x):
+
+    print(
+        letters[i],
+        "is available at positive index:",
+        i,
+        "and at negative index:",
+        i - x
+    )
+```
+
+### Output
+
+```text id="m3x8vp"
+X is available at positive index: 0 and at negative index: -3
+
+Y is available at positive index: 1 and at negative index: -2
+
+Z is available at positive index: 2 and at negative index: -1
+```
+
+---
+
+## Explanation
+
+Length:
+
+```python id="z9q1rt"
+len(letters)
+```
+
+returns:
+
+```text id="r5m8vx"
+3
+```
+
+Loop runs:
+
+```text id="w2x7pk"
+0
+1
+2
+```
+
+Negative index formula:
+
+```python id="g8r4tm"
+i - x
+```
+
+Calculation:
+
+```text id="f4v2qp"
+0 - 3 = -3
+
+1 - 3 = -2
+
+2 - 3 = -1
+```
+
+---
+
+# Important Functions of List
+
+## 1) `len()`
+
+### Definition
+
+`len()` returns the **number of elements present in the list**.
+
+---
+
+### Example
+
+```python id="h7q2vx"
+numbers = [10, 20, 30, 40]
+
+print(len(numbers))
+```
+
+### Output
+
+```text id="u1m9zk"
+4
+```
+
+---
+
+## Explanation
+
+List contains:
+
+```text id="t8r5vp"
+10
+20
+30
+40
+```
+
+Total elements:
+
+```text id="j4x2qm"
+4
+```
+
+---
+
+## 2) `count()`
+
+### Definition
+
+`count()` returns **how many times an element occurs in a list**.
+
+---
+
+### Example Program
+
+```python id="x6v2pk"
+numbers = [1,2,2,2,3,3]
+
+print(numbers.count(1))
+print(numbers.count(2))
+print(numbers.count(3))
+print(numbers.count(4))
+```
+
+### Output
+
+```text id="q5m8rt"
+1
+3
+2
+0
+```
+
+---
+
+## Explanation
+
+Occurrences:
+
+```text id="n7x4qp"
+1 → appears 1 time
+
+2 → appears 3 times
+
+3 → appears 2 times
+
+4 → appears 0 times
+```
+
+---
+
+## 3) `index()`
+
+### Definition
+
+`index()` returns the **index of first occurrence** of an element.
+
+---
+
+### Example Program
+
+```python id="w9q2pk"
+numbers = [1,2,2,2,3,3]
+
+print(numbers.index(1))
+print(numbers.index(2))
+print(numbers.index(3))
+print(numbers.index(4))
+```
+
+### Output
+
+```text id="p4x7mq"
+0
+1
+4
+
+ValueError: 4 is not in list
+```
+
+---
+
+## Explanation
+
+First occurrence positions:
+
+```text id="y8r2vp"
+1 → index 0
+
+2 → index 1
+
+3 → index 4
+```
+
+---
+
+### Important Note
+
+If element is not present:
+
+```text id="z1m9qt"
+ValueError occurs
+```
+
+Before using `index()`, check using:
+
+```python id="g7x2rv"
+4 in numbers
+```
+
+### Output
+
+```text id="r2v8pk"
+False
+```
+
+---
+
+# Key Takeaways
+
+* Lists are **mutable**.
+* Traversal means accessing elements sequentially.
+* Traversal methods:
+
+  * `while` loop
+  * `for` loop
+* `len()` → returns total elements.
+* `count()` → returns occurrences of an item.
+* `index()` → returns first occurrence position.
+* Invalid element in `index()` causes:
+
+```text id="w4q9mk"
+ValueError
+```
