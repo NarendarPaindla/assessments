@@ -10,3 +10,12 @@
 
 ---
 
+# 📚 Notes Table of Contents
+
+| Topic | Link |
+|--------|--------|
+| Functions | [functions.md](https://github.com/NarendarPaindla/assessments/blob/master-branch/notes/functions.md) |
+| List | [list.md](https://github.com/NarendarPaindla/assessments/blob/master-branch/notes/list.md) |
+| Tuple | [tuple.md](https://github.com/NarendarPaindla/assessments/blob/master-branch/notes/tuple.md) |
+| Set | [set.md](https://github.com/NarendarPaindla/assessments/blob/master-branch/notes/set.md) |
+| Dictionary | [dictionary.md](https://github.com/NarendarPaindla/assessments/blob/master-branch/notes/dictionary.md) |
