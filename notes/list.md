@@ -1174,3 +1174,711 @@ False
 ```text id="w4q9mk"
 ValueError
 ```
+# II. Manipulating Elements of List
+
+List provides several functions to **add, insert, remove, and manipulate elements**.
+
+Common list manipulation functions:
+
+1. `append()`
+2. `insert()`
+3. `extend()`
+4. `remove()`
+5. `pop()`
+
+---
+
+# 1) `append()` Function
+
+## Definition
+
+`append()` is used to **add an element at the end of the list**.
+
+### Syntax
+
+```python
+list.append(item)
+```
+
+---
+
+## Example 1: Adding Elements
+
+```python
+fruits = []
+
+fruits.append("Apple")
+fruits.append("Mango")
+fruits.append("Orange")
+
+print(fruits)
+```
+
+### Output
+
+```text
+['Apple', 'Mango', 'Orange']
+```
+
+---
+
+## Step-by-Step Explanation
+
+Initially:
+
+```python
+fruits = []
+```
+
+After:
+
+```python
+fruits.append("Apple")
+```
+
+List becomes:
+
+```text
+['Apple']
+```
+
+After:
+
+```python
+fruits.append("Mango")
+```
+
+List becomes:
+
+```text
+['Apple', 'Mango']
+```
+
+Final list:
+
+```text
+['Apple', 'Mango', 'Orange']
+```
+
+---
+
+## Example 2: Add Multiples of 10 up to 100
+
+```python
+numbers = []
+
+for i in range(11):
+
+    if i % 10 == 0:
+        numbers.append(i)
+
+print(numbers)
+```
+
+### Output
+
+```text
+[0, 10]
+```
+
+---
+
+### Improved Example (Multiples of 10 till 100)
+
+```python
+numbers = []
+
+for i in range(0, 101, 10):
+    numbers.append(i)
+
+print(numbers)
+```
+
+### Output
+
+```text
+[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+```
+
+---
+
+## Important Point
+
+`append()`:
+
+```text
+Always adds item at the end
+```
+
+---
+
+# 2) `insert()` Function
+
+## Definition
+
+`insert()` is used to **insert an element at a specific index position**.
+
+### Syntax
+
+```python
+list.insert(index, item)
+```
+
+---
+
+## Example 1
+
+```python
+numbers = [1, 2, 3, 4, 5]
+
+numbers.insert(1, 888)
+
+print(numbers)
+```
+
+### Output
+
+```text
+[1, 888, 2, 3, 4, 5]
+```
+
+---
+
+## Explanation
+
+Before insertion:
+
+```text
+[1, 2, 3, 4, 5]
+```
+
+Insert:
+
+```python
+numbers.insert(1, 888)
+```
+
+At index:
+
+```text
+1
+```
+
+Result:
+
+```text
+[1, 888, 2, 3, 4, 5]
+```
+
+---
+
+## Example 2
+
+```python
+numbers = [1, 2, 3, 4, 5]
+
+numbers.insert(10, 777)
+numbers.insert(-10, 999)
+
+print(numbers)
+```
+
+### Output
+
+```text
+[999, 1, 2, 3, 4, 5, 777]
+```
+
+---
+
+## Important Note
+
+### If index is greater than maximum index
+
+Element gets inserted at:
+
+```text
+Last position
+```
+
+Example:
+
+```python
+numbers.insert(100, 50)
+```
+
+---
+
+### If index is smaller than minimum index
+
+Element gets inserted at:
+
+```text
+First position
+```
+
+Example:
+
+```python
+numbers.insert(-100, 50)
+```
+
+---
+
+# Difference Between `append()` and `insert()`
+
+| `append()`         | `insert()`                     |
+| ------------------ | ------------------------------ |
+| Adds item at end   | Adds item at specific position |
+| Takes one argument | Takes index and item           |
+| Simpler            | More flexible                  |
+
+---
+
+## Example Comparison
+
+### `append()`
+
+```python
+data = [10, 20]
+
+data.append(30)
+
+print(data)
+```
+
+Output:
+
+```text
+[10, 20, 30]
+```
+
+---
+
+### `insert()`
+
+```python
+data = [10, 20]
+
+data.insert(1, 30)
+
+print(data)
+```
+
+Output:
+
+```text
+[10, 30, 20]
+```
+
+---
+
+# 3) `extend()` Function
+
+## Definition
+
+`extend()` is used to **add all elements of one list into another list**.
+
+### Syntax
+
+```python
+list1.extend(list2)
+```
+
+---
+
+## Example 1
+
+```python
+food1 = ["Chicken", "Paneer", "Fish"]
+
+food2 = ["Rice", "Curd", "Juice"]
+
+food1.extend(food2)
+
+print(food1)
+```
+
+### Output
+
+```text
+['Chicken', 'Paneer', 'Fish', 'Rice', 'Curd', 'Juice']
+```
+
+---
+
+## Explanation
+
+Before:
+
+```text
+food1 = ['Chicken', 'Paneer', 'Fish']
+```
+
+After extending:
+
+```text
+All elements of food2
+are added to food1
+```
+
+Final:
+
+```text
+['Chicken', 'Paneer', 'Fish', 'Rice', 'Curd', 'Juice']
+```
+
+---
+
+## Example 2: Extending with String
+
+```python
+items = ["Pen", "Book"]
+
+items.extend("Bag")
+
+print(items)
+```
+
+### Output
+
+```text
+['Pen', 'Book', 'B', 'a', 'g']
+```
+
+---
+
+## Explanation
+
+String behaves like sequence.
+
+Each character becomes separate element.
+
+---
+
+# 4) `remove()` Function
+
+## Definition
+
+`remove()` is used to **remove a specific element from the list**.
+
+### Syntax
+
+```python
+list.remove(item)
+```
+
+---
+
+## Important Rule
+
+If element appears multiple times:
+
+```text
+Only first occurrence is removed
+```
+
+---
+
+## Example 1
+
+```python
+numbers = [10, 20, 10, 30]
+
+numbers.remove(10)
+
+print(numbers)
+```
+
+### Output
+
+```text
+[20, 10, 30]
+```
+
+---
+
+## Explanation
+
+Original list:
+
+```text
+[10, 20, 10, 30]
+```
+
+First `10` removed.
+
+Second `10` remains.
+
+Final:
+
+```text
+[20, 10, 30]
+```
+
+---
+
+## Example 2: Item Not Present
+
+```python
+numbers = [10, 20, 30]
+
+numbers.remove(40)
+
+print(numbers)
+```
+
+### Output
+
+```text
+ValueError: list.remove(x): x not in list
+```
+
+---
+
+## Important Note
+
+Before using `remove()`:
+
+Check item exists or not.
+
+Example:
+
+```python
+if 40 in numbers:
+    numbers.remove(40)
+```
+
+---
+
+# 5) `pop()` Function
+
+## Definition
+
+`pop()`:
+
+1. **Removes element**
+2. **Returns removed element**
+
+It is the **only function that manipulates list and returns a value**.
+
+---
+
+## Example 1
+
+```python
+numbers = [10, 20, 30, 40]
+
+print(numbers.pop())
+print(numbers.pop())
+
+print(numbers)
+```
+
+### Output
+
+```text
+40
+30
+
+[10, 20]
+```
+
+---
+
+## Explanation
+
+First:
+
+```python
+numbers.pop()
+```
+
+Removes:
+
+```text
+40
+```
+
+Second:
+
+```python
+numbers.pop()
+```
+
+Removes:
+
+```text
+30
+```
+
+Remaining:
+
+```text
+[10, 20]
+```
+
+---
+
+## Example 2: Empty List
+
+```python
+numbers = []
+
+print(numbers.pop())
+```
+
+### Output
+
+```text
+IndexError: pop from empty list
+```
+
+---
+
+## Important Notes
+
+### 1. `pop()` Returns Value
+
+Example:
+
+```python
+x = numbers.pop()
+```
+
+Removed item stored in:
+
+```text
+x
+```
+
+---
+
+### 2. `pop()` Follows LIFO
+
+LIFO means:
+
+```text
+Last In First Out
+```
+
+Last inserted element removes first.
+
+---
+
+### 3. Remove by Index
+
+We can remove element at specific position.
+
+### Syntax
+
+```python
+list.pop(index)
+```
+
+---
+
+## Example
+
+```python
+numbers = [10,20,30,40,50,60]
+
+print(numbers.pop())
+print(numbers.pop(1))
+
+print(numbers)
+```
+
+### Output
+
+```text
+60
+20
+
+[10, 30, 40, 50]
+```
+
+---
+
+## Explanation
+
+### First Pop
+
+```python
+numbers.pop()
+```
+
+Removes:
+
+```text
+Last element → 60
+```
+
+---
+
+### Second Pop
+
+```python
+numbers.pop(1)
+```
+
+Removes:
+
+```text
+Element at index 1 → 20
+```
+
+---
+
+### Invalid Index
+
+```python
+numbers.pop(100)
+```
+
+### Output
+
+```text
+IndexError: pop index out of range
+```
+
+---
+
+# Text Diagram
+
+```text
+Original List
+
+[10, 20, 30, 40]
+
+pop()
+
+Removes
+   ↓
+  40
+
+Remaining
+
+[10, 20, 30]
+```
+
+---
+
+# Key Takeaways
+
+* `append()` → Adds element at end
+* `insert()` → Adds element at specific index
+* `extend()` → Adds all elements from another list
+* `remove()` → Removes specific item
+* `pop()` → Removes and returns item
+* `remove()` deletes first occurrence only
+* `pop()` follows:
+
+```text
+LIFO (Last In First Out)
+```
+
+* Invalid removal may cause:
+
+  * `ValueError`
+  * `IndexError`
