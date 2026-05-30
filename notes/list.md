@@ -1882,3 +1882,1390 @@ LIFO (Last In First Out)
 
   * `ValueError`
   * `IndexError`
+ 
+# Difference Between `remove()` and `pop()`
+
+| `remove()`                           | `pop()`                             |
+| ------------------------------------ | ----------------------------------- |
+| Removes a specific element           | Removes last element by default     |
+| Does not return value                | Returns removed value               |
+| Requires element name                | Can use index                       |
+| Gives `ValueError` if item not found | Gives `IndexError` if list is empty |
+
+---
+
+## Example: `remove()`
+
+```python id="z3m8xq"
+numbers = [10, 20, 30]
+
+numbers.remove(20)
+
+print(numbers)
+```
+
+### Output
+
+```text id="m7q2vp"
+[10, 30]
+```
+
+---
+
+## Example: `pop()`
+
+```python id="p5w8rk"
+numbers = [10, 20, 30]
+
+print(numbers.pop())
+```
+
+### Output
+
+```text id="r2x9mt"
+30
+```
+
+---
+
+## Important Note
+
+Lists are:
+
+```text id="g8m4pz"
+Dynamic in Nature
+```
+
+Meaning:
+
+We can:
+
+* Increase size
+* Decrease size
+
+### For Increasing Size
+
+Use:
+
+```text id="u1q7vk"
+append()
+insert()
+extend()
+```
+
+---
+
+### For Decreasing Size
+
+Use:
+
+```text id="y6m2rt"
+remove()
+pop()
+```
+
+---
+
+# III) Ordering Elements of List
+
+We can arrange list elements in a specific order.
+
+Functions used:
+
+1. `reverse()`
+2. `sort()`
+
+---
+
+# 1) `reverse()` Function
+
+## Definition
+
+`reverse()` is used to **reverse the order of list elements**.
+
+### Syntax
+
+```python id="h4m9wx"
+list.reverse()
+```
+
+---
+
+## Example
+
+```python id="n2x7vp"
+numbers = [10, 20, 30, 40]
+
+numbers.reverse()
+
+print(numbers)
+```
+
+### Output
+
+```text id="t8q1mz"
+[40, 30, 20, 10]
+```
+
+---
+
+## Step-by-Step Explanation
+
+Original List:
+
+```text id="y3m8vr"
+[10, 20, 30, 40]
+```
+
+After reverse:
+
+```text id="j6x2pk"
+[40, 30, 20, 10]
+```
+
+Order completely changes.
+
+---
+
+## Text Diagram
+
+```text id="f1m9qt"
+Before Reverse
+
+[10, 20, 30, 40]
+```
+
+```text id="v5x8rp"
+After Reverse
+
+[40, 30, 20, 10]
+```
+
+---
+
+# 2) `sort()` Function
+
+## Definition
+
+`sort()` is used to **arrange elements according to default natural sorting order**.
+
+### Syntax
+
+```python id="g7m2vp"
+list.sort()
+```
+
+---
+
+## Default Sorting Order
+
+### For Numbers
+
+Sorting order is:
+
+```text id="x9q4mk"
+Ascending Order
+```
+
+Example:
+
+```text id="m4x8rt"
+5 → 10 → 15 → 20
+```
+
+---
+
+### For Strings
+
+Sorting order is:
+
+```text id="r1m7vp"
+Alphabetical Order
+```
+
+Example:
+
+```text id="n5q2xz"
+Apple → Banana → Cat → Dog
+```
+
+---
+
+## Example 1: Sorting Numbers
+
+```python id="y2x8rp"
+numbers = [20, 5, 15, 10]
+
+numbers.sort()
+
+print(numbers)
+```
+
+### Output
+
+```text id="w6m4qt"
+[5, 10, 15, 20]
+```
+
+---
+
+## Explanation
+
+Before:
+
+```text id="u9x1pk"
+[20, 5, 15, 10]
+```
+
+After sorting:
+
+```text id="f3m8vp"
+[5, 10, 15, 20]
+```
+
+Ascending order.
+
+---
+
+## Example 2: Sorting Strings
+
+```python id="k8q2mr"
+fruits = ["Dog", "Banana", "Apple", "Cat"]
+
+fruits.sort()
+
+print(fruits)
+```
+
+### Output
+
+```text id="x5m9rt"
+['Apple', 'Banana', 'Cat', 'Dog']
+```
+
+---
+
+## Important Note
+
+To use `sort()`:
+
+List must contain:
+
+```text id="j7x4vp"
+Homogeneous Elements
+```
+
+Meaning:
+
+All elements should be same datatype.
+
+---
+
+## Wrong Example
+
+```python id="g2m9xp"
+data = [20, 10, "A", "B"]
+
+data.sort()
+
+print(data)
+```
+
+### Output
+
+```text id="v8q3rt"
+TypeError:
+'<' not supported between instances of 'str' and 'int'
+```
+
+---
+
+## Explanation
+
+Problem:
+
+```text id="m1x7pk"
+Integers and strings
+cannot be compared
+```
+
+---
+
+## Note About Python 2 vs Python 3
+
+In **Python 3**:
+
+Mixed datatype sorting is:
+
+```text id="r5m8qt"
+Invalid
+```
+
+Example:
+
+```python id="t9x2vp"
+data = [20, "B", 10, "A"]
+
+data.sort()
+```
+
+Produces:
+
+```text id="c4m7rx"
+TypeError
+```
+
+---
+
+# Sorting in Reverse Order
+
+We can sort in reverse order using:
+
+```python id="x2m8qt"
+reverse=True
+```
+
+---
+
+## Example
+
+```python id="u7x4pk"
+numbers = [40, 10, 30, 20]
+
+numbers.sort()
+
+print(numbers)
+
+numbers.sort(reverse=True)
+
+print(numbers)
+
+numbers.sort(reverse=False)
+
+print(numbers)
+```
+
+### Output
+
+```text id="m5q9vr"
+[10, 20, 30, 40]
+
+[40, 30, 20, 10]
+
+[10, 20, 30, 40]
+```
+
+---
+
+## Explanation
+
+### Default
+
+```python id="k3m8xp"
+sort()
+```
+
+Gives:
+
+```text id="p7x2rt"
+Ascending Order
+```
+
+---
+
+### Reverse Sorting
+
+```python id="f1q9mk"
+sort(reverse=True)
+```
+
+Gives:
+
+```text id="n6x4vp"
+Descending Order
+```
+
+---
+
+# Aliasing and Cloning of List Objects
+
+---
+
+# 1) Aliasing
+
+## Definition
+
+Assigning the same list reference to another variable is called:
+
+```text id="y9m2qt"
+Aliasing
+```
+
+---
+
+## Example
+
+```python id="r8x5vp"
+x = [10, 20, 30, 40]
+
+y = x
+
+print(id(x))
+print(id(y))
+```
+
+### Explanation
+
+Both variables point to:
+
+```text id="t4m7qx"
+Same Memory Location
+```
+
+---
+
+## Problem in Aliasing
+
+If one list changes:
+
+```text id="g2x9pk"
+Other list also changes
+```
+
+because both refer to same object.
+
+---
+
+## Example
+
+```python id="j5m8vr"
+x = [10, 20, 30, 40]
+
+y = x
+
+y[1] = 777
+
+print(x)
+```
+
+### Output
+
+```text id="u1x4qt"
+[10, 777, 30, 40]
+```
+
+---
+
+## Explanation
+
+Even though change happened in `y`:
+
+```text id="n8m2vp"
+x also changed
+```
+
+because:
+
+```text id="w3q7rx"
+Both point to same object
+```
+
+---
+
+## Text Diagram
+
+```text id="z6x8pk"
+x ───────┐
+         │
+         ▼
+     [10,20,30,40]
+         ▲
+         │
+y ───────┘
+```
+
+---
+
+# 2) Cloning
+
+## Definition
+
+Creating an exact duplicate copy of list is called:
+
+```text id="m7q2vp"
+Cloning
+```
+
+Cloning avoids aliasing problem.
+
+We can do cloning using:
+
+1. Slice Operator `[:]`
+2. `copy()` function
+
+---
+
+# A) Cloning Using Slice Operator
+
+## Example
+
+```python id="q8x5rt"
+x = [10, 20, 30, 40]
+
+y = x[:]
+
+y[1] = 777
+
+print(x)
+print(y)
+```
+
+### Output
+
+```text id="w2m9xp"
+[10, 20, 30, 40]
+
+[10, 777, 30, 40]
+```
+
+---
+
+## Explanation
+
+Since cloning creates:
+
+```text id="p6x4vk"
+Separate object
+```
+
+Changes in `y`:
+
+```text id="u8m1qt"
+Do not affect x
+```
+
+---
+
+# B) Cloning Using `copy()` Function
+
+## Example
+
+```python id="n5x8rp"
+x = [10, 20, 30, 40]
+
+y = x.copy()
+
+y[1] = 777
+
+print(x)
+print(y)
+```
+
+### Output
+
+```text id="k2m7vp"
+[10, 20, 30, 40]
+
+[10, 777, 30, 40]
+```
+
+---
+
+## Explanation
+
+`copy()` creates:
+
+```text id="h9q3rt"
+Independent list object
+```
+
+---
+
+# Difference Between `=` Operator and `copy()`
+
+| `=` Operator            | `copy()` Function       |
+| ----------------------- | ----------------------- |
+| Used for aliasing       | Used for cloning        |
+| Same memory shared      | Separate memory created |
+| Changes reflect in both | Changes independent     |
+
+---
+
+## Example Comparison
+
+### Using `=`
+
+```python id="z4m8qt"
+a = [10,20]
+
+b = a
+```
+
+Both point to same list.
+
+---
+
+### Using `copy()`
+
+```python id="y7x2pk"
+a = [10,20]
+
+b = a.copy()
+```
+
+Separate lists created.
+
+---
+
+# Key Takeaways
+
+* `reverse()` reverses list order.
+* `sort()` sorts list elements.
+* Default sorting:
+
+  * Numbers → Ascending
+  * Strings → Alphabetical
+* `reverse=True` gives descending order.
+* `sort()` requires homogeneous datatype.
+* **Aliasing** means sharing same object.
+* **Cloning** means creating duplicate independent copy.
+* Cloning methods:
+
+  * `[:]`
+  * `copy()`
+* `=` → aliasing
+* `copy()` → cloning
+
+# Using Mathematical Operators for List Objects
+
+We can use:
+
+```text id="q8m2vx"
++
+*
+```
+
+operators for list objects.
+
+---
+
+# 1) Concatenation Operator (`+`)
+
+## Definition
+
+The `+` operator is used to **combine two lists into a single list**.
+
+This process is called:
+
+```text id="x4p7qt"
+Concatenation
+```
+
+---
+
+## Example 1
+
+```python id="r2m9wx"
+list1 = [10, 20, 30]
+
+list2 = [40, 50, 60]
+
+result = list1 + list2
+
+print(result)
+```
+
+### Output
+
+```text id="m7x2vp"
+[10, 20, 30, 40, 50, 60]
+```
+
+---
+
+## Step-by-Step Explanation
+
+First List:
+
+```text id="v5m8qt"
+[10, 20, 30]
+```
+
+Second List:
+
+```text id="k1x4rp"
+[40, 50, 60]
+```
+
+Using:
+
+```python id="g8m2vx"
+list1 + list2
+```
+
+Combines both:
+
+```text id="n6q9pk"
+[10, 20, 30, 40, 50, 60]
+```
+
+---
+
+## Important Note
+
+For `+` operator:
+
+```text id="t4m7wx"
+Both operands must be lists
+```
+
+Otherwise:
+
+```text id="p9x2vr"
+TypeError occurs
+```
+
+---
+
+## Wrong Example
+
+```python id="w3m8qt"
+data = [10, 20]
+
+result = data + 40
+```
+
+### Output
+
+```text id="r7x1vp"
+TypeError:
+can only concatenate list
+(not "int") to list
+```
+
+---
+
+## Correct Example
+
+```python id="u5m9qx"
+data = [10, 20]
+
+result = data + [40]
+
+print(result)
+```
+
+### Output
+
+```text id="f8x2pk"
+[10, 20, 40]
+```
+
+---
+
+# 2) Repetition Operator (`*`)
+
+## Definition
+
+The `*` operator is used to **repeat list elements multiple times**.
+
+### Syntax
+
+```python id="m2q7vx"
+list * number
+```
+
+---
+
+## Example
+
+```python id="k8m4qt"
+numbers = [10, 20, 30]
+
+result = numbers * 3
+
+print(result)
+```
+
+### Output
+
+```text id="x1p9vr"
+[10, 20, 30, 10, 20, 30, 10, 20, 30]
+```
+
+---
+
+## Explanation
+
+Original list:
+
+```text id="n4m8pk"
+[10, 20, 30]
+```
+
+Repeated:
+
+```text id="v7x2qt"
+3 times
+```
+
+Final output:
+
+```text id="u9m5rp"
+[10,20,30,10,20,30,10,20,30]
+```
+
+---
+
+# Comparing List Objects
+
+We can compare lists using:
+
+```text id="q6m2wx"
+Comparison Operators
+```
+
+Example operators:
+
+```text id="w2x8pk"
+==
+!=
+<
+>
+<=
+>=
+```
+
+---
+
+## Example 1: Equality Comparison
+
+```python id="r5m9qt"
+x = ["Dog", "Cat", "Rat"]
+
+y = ["Dog", "Cat", "Rat"]
+
+z = ["DOG", "CAT", "RAT"]
+
+print(x == y)
+
+print(x == z)
+
+print(x != z)
+```
+
+### Output
+
+```text id="m1x7vp"
+True
+
+False
+
+True
+```
+
+---
+
+## Explanation
+
+### `x == y`
+
+Both lists have:
+
+* Same elements
+* Same order
+* Same case
+
+Result:
+
+```text id="t8m2pk"
+True
+```
+
+---
+
+### `x == z`
+
+Problem:
+
+```text id="g3x9qt"
+Case is different
+```
+
+Python is:
+
+```text id="u6m4rp"
+Case Sensitive
+```
+
+So:
+
+```text id="w9x1pk"
+False
+```
+
+---
+
+## Important Note for `==` and `!=`
+
+Python checks:
+
+1. Number of elements
+2. Order of elements
+3. Content of elements (case sensitive)
+
+---
+
+# Relational Operators on Lists
+
+When using:
+
+```text id="h7m2vx"
+<
+>
+<=
+>=
+```
+
+Python compares:
+
+```text id="y4x8qt"
+Only first unmatched element
+```
+
+---
+
+## Example 1
+
+```python id="k2m9rp"
+x = [50, 20, 30]
+
+y = [40, 50, 60, 100]
+
+print(x > y)
+
+print(x >= y)
+
+print(x < y)
+
+print(x <= y)
+```
+
+### Output
+
+```text id="p8x4qt"
+True
+
+True
+
+False
+
+False
+```
+
+---
+
+## Explanation
+
+Python compares:
+
+First elements:
+
+```text id="r1m7pk"
+50 and 40
+```
+
+Since:
+
+```text id="z5x2vp"
+50 > 40
+```
+
+Python stops comparison.
+
+---
+
+## Example 2
+
+```python id="n9m4qt"
+x = ["Dog", "Cat", "Rat"]
+
+y = ["Rat", "Cat", "Dog"]
+
+print(x > y)
+
+print(x >= y)
+
+print(x < y)
+
+print(x <= y)
+```
+
+### Output
+
+```text id="j6x8rp"
+False
+
+False
+
+True
+
+True
+```
+
+---
+
+## Explanation
+
+First comparison:
+
+```text id="m2q7pk"
+"Dog" < "Rat"
+```
+
+So:
+
+```text id="f4x9qt"
+x < y → True
+```
+
+---
+
+# Membership Operators
+
+## Definition
+
+Membership operators check whether an element exists in a list or not.
+
+Operators:
+
+1. `in`
+2. `not in`
+
+---
+
+## Example
+
+```python id="v7m2qx"
+numbers = [10, 20, 30, 40]
+
+print(10 in numbers)
+
+print(10 not in numbers)
+
+print(50 in numbers)
+
+print(50 not in numbers)
+```
+
+### Output
+
+```text id="r8x4vp"
+True
+
+False
+
+False
+
+True
+```
+
+---
+
+## Explanation
+
+### `10 in numbers`
+
+Checks:
+
+```text id="q1m9pk"
+Does 10 exist?
+```
+
+Yes.
+
+Output:
+
+```text id="t6x2qt"
+True
+```
+
+---
+
+### `50 in numbers`
+
+Checks:
+
+```text id="n3m7rp"
+Does 50 exist?
+```
+
+No.
+
+Output:
+
+```text id="p9x5vk"
+False
+```
+
+---
+
+# `clear()` Function
+
+## Definition
+
+`clear()` removes **all elements from the list**.
+
+### Syntax
+
+```python id="g2m8qt"
+list.clear()
+```
+
+---
+
+## Example
+
+```python id="w5x9rp"
+numbers = [10, 20, 30, 40]
+
+print(numbers)
+
+numbers.clear()
+
+print(numbers)
+```
+
+### Output
+
+```text id="k8m1vx"
+[10, 20, 30, 40]
+
+[]
+```
+
+---
+
+## Explanation
+
+Before:
+
+```text id="u4x7qt"
+[10, 20, 30, 40]
+```
+
+After:
+
+```python id="r9m2pk"
+numbers.clear()
+```
+
+All elements removed.
+
+Result:
+
+```text id="x6m8rp"
+[]
+```
+
+---
+
+# Nested Lists
+
+## Definition
+
+When one list is present inside another list, it is called:
+
+```text id="f1x9qt"
+Nested List
+```
+
+---
+
+## Example
+
+```python id="j7m4vx"
+data = [10, 20, [30, 40]]
+
+print(data)
+
+print(data[0])
+
+print(data[2])
+
+print(data[2][0])
+
+print(data[2][1])
+```
+
+### Output
+
+```text id="m5x2pk"
+[10, 20, [30, 40]]
+
+10
+
+[30, 40]
+
+30
+
+40
+```
+
+---
+
+## Step-by-Step Explanation
+
+### Access First Element
+
+```python id="t9m7rp"
+data[0]
+```
+
+Output:
+
+```text id="q3x8qt"
+10
+```
+
+---
+
+### Access Nested List
+
+```python id="r6m1vx"
+data[2]
+```
+
+Output:
+
+```text id="p4x9pk"
+[30, 40]
+```
+
+---
+
+### Access Nested Elements
+
+```python id="k2m8rp"
+data[2][0]
+```
+
+Output:
+
+```text id="g8x4qt"
+30
+```
+
+---
+
+```python id="w1m9vx"
+data[2][1]
+```
+
+Output:
+
+```text id="u7x2pk"
+40
+```
+
+---
+
+## Important Note
+
+Nested list elements are accessed using:
+
+```text id="t5m8rp"
+Multiple Indexes
+```
+
+Just like matrix or multidimensional arrays.
+
+---
+
+# Nested List as Matrix
+
+Python can represent:
+
+```text id="x9m4qt"
+Matrix
+```
+
+using nested lists.
+
+---
+
+## Example
+
+```python id="v2x8rp"
+matrix = [
+    [10,20,30],
+    [40,50,60],
+    [70,80,90]
+]
+
+print(matrix)
+
+print("Elements Row Wise:")
+
+for row in matrix:
+    print(row)
+
+print("Elements in Matrix Style:")
+
+for i in range(len(matrix)):
+
+    for j in range(len(matrix[i])):
+
+        print(matrix[i][j], end=" ")
+
+    print()
+```
+
+### Output
+
+```text id="m7x1pk"
+[[10,20,30],
+ [40,50,60],
+ [70,80,90]]
+
+Elements Row Wise:
+
+[10,20,30]
+
+[40,50,60]
+
+[70,80,90]
+
+Elements in Matrix Style:
+
+10 20 30
+
+40 50 60
+
+70 80 90
+```
+
+---
+
+# Key Takeaways
+
+* `+` → Concatenates lists
+* `*` → Repeats list elements
+* List comparison uses:
+
+  * Elements
+  * Order
+  * Case sensitivity
+* Membership operators:
+
+  * `in`
+  * `not in`
+* `clear()` removes all elements.
+* Nested list = list inside another list.
+* Nested lists can represent matrices.
+* Nested elements accessed using:
+
+```python id="h8x4qt"
+list[index1][index2]
+```
+
