@@ -1016,4 +1016,419 @@ Generator Object
 ```
 
 not tuple.
+# Differences Between List and Tuple
+
+Although **List** and **Tuple** look similar, there are some important differences between them.
+
+Both:
+
+* Store multiple values
+* Preserve insertion order
+* Allow duplicate values
+* Support indexing and slicing
+* Allow heterogeneous datatypes
+
+But the main difference is:
+
+```text id="m7x2qt"
+List → Mutable
+
+Tuple → Immutable
+```
+
+---
+
+# Comparison Between List and Tuple
+
+| Feature        | List                       | Tuple                  |
+| -------------- | -------------------------- | ---------------------- |
+| Representation | Uses square brackets `[ ]` | Uses parentheses `( )` |
+| Mutability     | Mutable                    | Immutable              |
+| Data Changes   | Can be modified            | Cannot be modified     |
+| Best Use Case  | Frequently changing data   | Fixed data             |
+| Dictionary Key | Cannot be used             | Can be used            |
+| Performance    | Slightly slower            | Faster                 |
+
+---
+
+# 1) Representation Difference
+
+## List
+
+A list is a collection of comma-separated values enclosed inside:
+
+```text id="p4m8vx"
+Square Brackets [ ]
+```
+
+### Example
+
+```python id="x9m2qt"
+numbers = [10, 20, 30, 40]
+
+print(numbers)
+```
+
+### Output
+
+```text id="u3x7pk"
+[10, 20, 30, 40]
+```
+
+---
+
+## Tuple
+
+A tuple is a collection of comma-separated values enclosed inside:
+
+```text id="k8m1vp"
+Parentheses ( )
+```
+
+### Example
+
+```python id="w2x9rt"
+numbers = (10, 20, 30, 40)
+
+print(numbers)
+```
+
+### Output
+
+```text id="g7m4qx"
+(10, 20, 30, 40)
+```
+
+---
+
+## Important Note
+
+For tuples:
+
+```text id="f1x8pk"
+Parentheses are optional
+```
+
+Example:
+
+```python id="n6m2qt"
+t = 10, 20, 30
+```
+
+Still treated as:
+
+```text id="z5x9rp"
+Tuple
+```
+
+---
+
+# 2) Mutability Difference
+
+## List is Mutable
+
+### Definition
+
+After creating a list:
+
+```text id="v8m4qt"
+We can modify content
+```
+
+---
+
+### Example
+
+```python id="r3x7pk"
+numbers = [10, 20, 30]
+
+numbers[1] = 70
+
+print(numbers)
+```
+
+### Output
+
+```text id="t1m9vx"
+[10, 70, 30]
+```
+
+---
+
+## Explanation
+
+Original:
+
+```text id="p7x2qt"
+[10, 20, 30]
+```
+
+Changed:
+
+```python id="g4m8rp"
+numbers[1] = 70
+```
+
+Updated:
+
+```text id="x2m5vk"
+[10, 70, 30]
+```
+
+Lists support modification.
+
+---
+
+## Tuple is Immutable
+
+### Definition
+
+After tuple creation:
+
+```text id="u9m1qt"
+We cannot change content
+```
+
+---
+
+### Example
+
+```python id="q8x4rp"
+t = (10, 20, 30)
+
+t[1] = 70
+```
+
+### Output
+
+```text id="n5m8vx"
+TypeError:
+'tuple' object does not support item assignment
+```
+
+---
+
+## Explanation
+
+Tuple does not allow:
+
+```text id="m2x7pk"
+Modification
+```
+
+Hence:
+
+```text id="w6m9qt"
+Immutable
+```
+
+---
+
+# 3) Fixed vs Changing Data
+
+## Use List When Data Changes Frequently
+
+Example:
+
+```text id="f3x8rp"
+Shopping Cart
+Student Marks
+Attendance List
+```
+
+Because values may:
+
+```text id="r7m2vk"
+Increase
+Decrease
+Change
+```
+
+---
+
+## Use Tuple When Data is Fixed
+
+Example:
+
+```text id="t4x9qt"
+Days of Week
+Months
+GPS Coordinates
+```
+
+Because values:
+
+```text id="p1m7rp"
+Never change
+```
+
+---
+
+# 4) Dictionary Key Difference
+
+## List Cannot Be Used as Dictionary Key
+
+Reason:
+
+```text id="j8x2vk"
+List is Mutable
+```
+
+Dictionary keys must be:
+
+```text id="z3m9qt"
+Hashable
+Immutable
+```
+
+---
+
+### Wrong Example
+
+```python id="g5x1rp"
+data = {
+    [1, 2]: "Python"
+}
+```
+
+### Output
+
+```text id="k7m4vx"
+TypeError:
+unhashable type: 'list'
+```
+
+---
+
+## Tuple Can Be Used as Dictionary Key
+
+Reason:
+
+```text id="x9m2qt"
+Tuple is Immutable
+```
+
+---
+
+### Correct Example
+
+```python id="u2x8rp"
+data = {
+    (1, 2): "Python"
+}
+
+print(data)
+```
+
+### Output
+
+```text id="r5m7vk"
+{(1, 2): 'Python'}
+```
+
+---
+
+# Real-Life Analogy
+
+Imagine:
+
+### List = Whiteboard
+
+You can:
+
+```text id="n8x4qt"
+Write
+Erase
+Modify
+```
+
+Again and again.
+
+---
+
+### Tuple = Printed Book
+
+You:
+
+```text id="m1x9rp"
+Cannot change printed content
+```
+
+It stays fixed.
+
+---
+
+# Summary Table
+
+| Property        | List         | Tuple       |
+| --------------- | ------------ | ----------- |
+| Symbol          | `[ ]`        | `( )`       |
+| Mutable         | Yes          | No          |
+| Immutable       | No           | Yes         |
+| Size Change     | Allowed      | Not Allowed |
+| Modify Elements | Yes          | No          |
+| Dictionary Key  | No           | Yes         |
+| Performance     | Slower       | Faster      |
+| Best For        | Dynamic Data | Fixed Data  |
+
+---
+
+# Text Diagram
+
+```text id="w4x2qt"
+LIST
+
+[10, 20, 30]
+
+Can Change
+     ↓
+
+[10, 70, 30]
+```
+
+```text id="v7m8rp"
+TUPLE
+
+(10, 20, 30)
+
+Cannot Change
+      ↓
+
+TypeError
+```
+
+---
+
+# Key Takeaways
+
+* List and Tuple both store multiple values.
+* Main difference:
+
+```text id="q9x1vk"
+List → Mutable
+
+Tuple → Immutable
+```
+
+* List uses:
+
+```text id="u5m8qt"
+[ ]
+```
+
+* Tuple uses:
+
+```text id="p2x7rp"
+( )
+```
+
+* Use **List** for changing data.
+* Use **Tuple** for fixed data.
+* Tuple can be used as:
+
+```text id="t6m4vk"
+Dictionary Key
+```
+
+because it is immutable.
 
