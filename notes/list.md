@@ -3268,4 +3268,512 @@ Elements in Matrix Style:
 ```python id="h8x4qt"
 list[index1][index2]
 ```
+# List Comprehensions
+
+## Definition
+
+**List Comprehension** is a short and compact way of creating lists from iterable objects like:
+
+* List
+* Tuple
+* Dictionary
+* String
+* Range
+
+We can also apply:
+
+```text id="p8x2qm"
+Conditions
+```
+
+while creating the list.
+
+In simple words:
+
+```text id="m7v4rp"
+List comprehension helps us
+create lists in one line.
+```
+
+---
+
+## Why List Comprehension?
+
+Normally, to create a list:
+
+```python id="x2m9qt"
+numbers = []
+
+for i in range(1, 6):
+    numbers.append(i)
+
+print(numbers)
+```
+
+### Output
+
+```text id="k5x8vp"
+[1, 2, 3, 4, 5]
+```
+
+This takes multiple lines.
+
+Using list comprehension:
+
+```python id="t9m2rx"
+numbers = [i for i in range(1, 6)]
+
+print(numbers)
+```
+
+Same result with shorter code.
+
+---
+
+# Syntax of List Comprehension
+
+```python id="r4x7pk"
+list_name = [
+    expression
+    for item in iterable
+    if condition
+]
+```
+
+### Components
+
+| Part       | Meaning              |
+| ---------- | -------------------- |
+| Expression | Value to add         |
+| `for`      | Iteration            |
+| Iterable   | Source of data       |
+| `if`       | Condition (optional) |
+
+---
+
+# Example 1: Squares from 1 to 10
+
+```python id="w8m2qt"
+squares = [x * x for x in range(1, 11)]
+
+print(squares)
+```
+
+### Output
+
+```text id="g1x9vp"
+[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+```
+
+---
+
+## Step-by-Step Explanation
+
+Loop runs:
+
+```text id="p5m8rx"
+1 to 10
+```
+
+Python performs:
+
+```text id="u2x7qt"
+1 × 1 = 1
+2 × 2 = 4
+3 × 3 = 9
+```
+
+Final list:
+
+```text id="m6x4pk"
+[1,4,9,16,25,36,49,64,81,100]
+```
+
+---
+
+# Example 2: Powers of 2
+
+```python id="n3m8vp"
+values = [2 ** x for x in range(1, 6)]
+
+print(values)
+```
+
+### Output
+
+```text id="j7x2qt"
+[2, 4, 8, 16, 32]
+```
+
+---
+
+## Explanation
+
+Calculation:
+
+```text id="f4m9pk"
+2¹ = 2
+2² = 4
+2³ = 8
+2⁴ = 16
+2⁵ = 32
+```
+
+---
+
+# Example 3: Even Squares
+
+```python id="q9x1rp"
+squares = [x * x for x in range(1, 11)]
+
+even_squares = [
+    x for x in squares
+    if x % 2 == 0
+]
+
+print(even_squares)
+```
+
+### Output
+
+```text id="t5m8qx"
+[4, 16, 36, 64, 100]
+```
+
+---
+
+## Explanation
+
+Condition:
+
+```python id="g2x7vp"
+x % 2 == 0
+```
+
+Only even square numbers remain.
+
+---
+
+# Example 4: First Letter of Words
+
+```python id="r8m2qt"
+words = [
+    "Arjun",
+    "Nikhil",
+    "Vijay",
+    "Charan"
+]
+
+letters = [word[0] for word in words]
+
+print(letters)
+```
+
+### Output
+
+```text id="x4m9vp"
+['A', 'N', 'V', 'C']
+```
+
+---
+
+## Explanation
+
+Python takes:
+
+```text id="j1x7pk"
+First character
+```
+
+of every word.
+
+Example:
+
+```text id="n5m2qt"
+Arjun → A
+
+Nikhil → N
+```
+
+---
+
+# Example 5: Elements Present in One List But Not Another
+
+```python id="u9x4rp"
+list1 = [10, 20, 30, 40]
+
+list2 = [30, 40, 50, 60]
+
+result = [
+    i for i in list1
+    if i not in list2
+]
+
+print(result)
+```
+
+### Output
+
+```text id="k3m8vp"
+[10, 20]
+```
+
+---
+
+## Explanation
+
+Check:
+
+```text id="p7x2qt"
+Elements in list1
+but not in list2
+```
+
+Result:
+
+```text id="z5m9pk"
+10
+20
+```
+
+---
+
+# Example 6: Common Elements in Two Lists
+
+```python id="q2x8rp"
+list1 = [10, 20, 30, 40]
+
+list2 = [30, 40, 50, 60]
+
+common = [
+    i for i in list1
+    if i in list2
+]
+
+print(common)
+```
+
+### Output
+
+```text id="t8m1qx"
+[30, 40]
+```
+
+---
+
+## Explanation
+
+Condition:
+
+```text id="u4x7pk"
+Element exists
+in both lists
+```
+
+Result:
+
+```text id="m9v2rp"
+30
+40
+```
+
+---
+
+# Example 7: Convert Sentence to Uppercase with Length
+
+```python id="x5m8qt"
+words = "python programming becomes easier with practice".split()
+
+print(words)
+
+result = [
+    [word.upper(), len(word)]
+    for word in words
+]
+
+print(result)
+```
+
+### Output
+
+```text id="r1x9vp"
+['python', 'programming', 'becomes', 'easier', 'with', 'practice']
+
+[
+ ['PYTHON', 6],
+ ['PROGRAMMING', 11],
+ ['BECOMES', 8],
+ ['EASIER', 6],
+ ['WITH', 4],
+ ['PRACTICE', 8]
+]
+```
+
+---
+
+# Real-Life Analogy
+
+Imagine a teacher preparing a student list.
+
+Students:
+
+```text id="j6m2qt"
+Ravi
+Ajay
+Nikhil
+```
+
+Teacher wants:
+
+```text id="v8x4rp"
+Only first letters
+```
+
+Instead of manually:
+
+```text id="q4m9pk"
+R
+A
+N
+```
+
+List comprehension automatically creates:
+
+```text id="h7x2vp"
+['R', 'A', 'N']
+```
+
+---
+
+# Program: Display Unique Vowels Present in a Word
+
+## Problem Statement
+
+Write a program to display:
+
+```text id="p2m8qt"
+Unique vowels
+```
+
+present in a word.
+
+---
+
+## Program
+
+```python id="w9x1rp"
+vowels = ['a', 'e', 'i', 'o', 'u']
+
+word = input(
+    "Enter the word to search vowels: "
+)
+
+found = []
+
+for letter in word:
+
+    if letter in vowels:
+
+        if letter not in found:
+            found.append(letter)
+
+print(found)
+
+print(
+    "The number of different vowels present in",
+    word,
+    "is",
+    len(found)
+)
+```
+
+---
+
+## Example Input
+
+```text id="x3m7vp"
+programminglanguage
+```
+
+### Output
+
+```text id="g8x2qt"
+['o', 'a', 'i', 'u', 'e']
+
+The number of different vowels present in programminglanguage is 5
+```
+
+---
+
+## Step-by-Step Explanation
+
+### Step 1: Vowel List
+
+```python id="m5x9pk"
+vowels = ['a','e','i','o','u']
+```
+
+---
+
+### Step 2: Loop Through Word
+
+```python id="u1m8qt"
+for letter in word
+```
+
+Checks every character.
+
+---
+
+### Step 3: Check Vowel
+
+```python id="n7x4rp"
+if letter in vowels
+```
+
+---
+
+### Step 4: Avoid Duplicates
+
+```python id="t2m9vp"
+if letter not in found
+```
+
+Only unique vowels added.
+
+---
+
+# Key Takeaways
+
+* List comprehension creates lists in a short way.
+* Syntax:
+
+```python id="k6x2qt"
+[expression for item in iterable if condition]
+```
+
+* Used for:
+
+  * Squares
+  * Filtering
+  * String processing
+  * List comparison
+* Benefits:
+
+  * Shorter code
+  * Better readability
+  * Faster execution
+* `if` condition is optional.
+* List comprehension works with:
+
+  * List
+  * Tuple
+  * String
+  * Dictionary
+  * Range
+* Unique vowel program:
+
+  * Finds vowels
+  * Removes duplicates
+  * Counts unique vowels
 
