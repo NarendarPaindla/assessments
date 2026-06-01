@@ -1348,3 +1348,1374 @@ Parent Exception Later
 
 * Parentheses are mandatory when specifying multiple exceptions in one `except` block.
 
+
+# Default `except` Block
+
+## What is a Default `except` Block?
+
+A **default `except` block** can handle:
+
+```text
+Any type of exception
+```
+
+when no specific exception handler matches.
+
+It acts as a:
+
+```text
+Fallback Exception Handler
+```
+
+---
+
+## Syntax
+
+```python
+try:
+    risky code
+
+except:
+    handling code
+```
+
+---
+
+## Example
+
+```python
+try:
+    x = int(input("Enter First Number: "))
+    y = int(input("Enter Second Number: "))
+
+    print(x / y)
+
+except ZeroDivisionError:
+    print(
+        "ZeroDivisionError: Can't divide by zero"
+    )
+
+except:
+    print(
+        "Default Except: Please provide valid input only"
+    )
+```
+
+---
+
+## Execution 1
+
+### Input
+
+```text
+Enter First Number: 10
+Enter Second Number: 0
+```
+
+### Output
+
+```text
+ZeroDivisionError:
+Can't divide by zero
+```
+
+---
+
+### Explanation
+
+Exception Raised:
+
+```text
+ZeroDivisionError
+```
+
+Matching handler found:
+
+```python
+except ZeroDivisionError:
+```
+
+So this block executes.
+
+---
+
+## Execution 2
+
+### Input
+
+```text
+Enter First Number: 10
+Enter Second Number: ten
+```
+
+### Output
+
+```text
+Default Except:
+Please provide valid input only
+```
+
+---
+
+### Explanation
+
+Exception Raised:
+
+```text
+ValueError
+```
+
+No specific handler available.
+
+Therefore:
+
+```python
+except:
+```
+
+handles it.
+
+---
+
+# Important Rule
+
+When multiple exception handlers are present:
+
+```text
+Default except block
+must always be the last block
+```
+
+Otherwise:
+
+```text
+SyntaxError
+```
+
+occurs.
+
+---
+
+## Wrong Example
+
+```python
+try:
+    print(10/0)
+
+except:
+    print("Default Except")
+
+except ZeroDivisionError:
+    print("ZeroDivisionError")
+```
+
+### Output
+
+```text
+SyntaxError:
+default 'except:' must be last
+```
+
+---
+
+## Why?
+
+Because:
+
+```text
+Default except can catch every exception.
+```
+
+If it appears first:
+
+```text
+Other except blocks become unreachable.
+```
+
+---
+
+# Valid Forms of `except` Block
+
+Python supports several forms.
+
+---
+
+## 1. Specific Exception
+
+```python
+except ZeroDivisionError:
+```
+
+Handles only:
+
+```text
+ZeroDivisionError
+```
+
+---
+
+## 2. Specific Exception with Message
+
+```python
+except ZeroDivisionError as msg:
+```
+
+Handles exception and stores error description in:
+
+```python
+msg
+```
+
+---
+
+## 3. Multiple Exceptions
+
+```python
+except (
+    ZeroDivisionError,
+    ValueError
+):
+```
+
+Handles both exceptions.
+
+---
+
+## 4. Multiple Exceptions with Message
+
+```python
+except (
+    ZeroDivisionError,
+    ValueError
+) as msg:
+```
+
+Stores exception description in:
+
+```python
+msg
+```
+
+---
+
+## 5. Default Exception Handler
+
+```python
+except:
+```
+
+Handles any exception.
+
+---
+
+# Finally Block
+
+## What is a Finally Block?
+
+The **finally block** is used for:
+
+```text
+Cleanup Code
+```
+
+or
+
+```text
+Resource Release Code
+```
+
+---
+
+## Why Not Put Cleanup Code Inside try?
+
+Not all statements inside:
+
+```python
+try
+```
+
+are guaranteed to execute.
+
+An exception may interrupt execution.
+
+---
+
+## Why Not Put Cleanup Code Inside except?
+
+If no exception occurs:
+
+```python
+except
+```
+
+will not execute.
+
+---
+
+## Solution
+
+Python provides:
+
+```python
+finally
+```
+
+block.
+
+---
+
+## Main Purpose of Finally Block
+
+Used to write:
+
+* File closing code
+* Database connection closing code
+* Network connection release code
+* Memory cleanup code
+
+---
+
+## General Structure
+
+```python
+try:
+    Risky Code
+
+except:
+    Handling Code
+
+finally:
+    Cleanup Code
+```
+
+---
+
+# Special Property of Finally Block
+
+The `finally` block executes:
+
+```text
+Always
+```
+
+regardless of:
+
+* Exception raised or not
+* Exception handled or not
+* Program terminates normally or abnormally
+
+---
+
+# Case 1: No Exception
+
+## Program
+
+```python
+try:
+    print("try")
+
+except:
+    print("except")
+
+finally:
+    print("finally")
+```
+
+### Output
+
+```text
+try
+finally
+```
+
+---
+
+## Flow
+
+```text
+try
+ ↓
+finally
+```
+
+---
+
+# Case 2: Exception Raised and Handled
+
+## Program
+
+```python
+try:
+    print("try")
+    print(10/0)
+
+except ZeroDivisionError:
+    print("except")
+
+finally:
+    print("finally")
+```
+
+### Output
+
+```text
+try
+except
+finally
+```
+
+---
+
+## Flow
+
+```text
+try
+ ↓
+Exception
+ ↓
+except
+ ↓
+finally
+```
+
+---
+
+# Case 3: Exception Raised but Not Handled
+
+## Program
+
+```python
+try:
+    print("try")
+    print(10/0)
+
+except NameError:
+    print("except")
+
+finally:
+    print("finally")
+```
+
+### Output
+
+```text
+try
+finally
+
+ZeroDivisionError:
+division by zero
+```
+
+---
+
+## Explanation
+
+Exception:
+
+```text
+ZeroDivisionError
+```
+
+No matching handler found.
+
+Still:
+
+```python
+finally
+```
+
+executes before program terminates.
+
+---
+
+## Flow
+
+```text
+try
+ ↓
+Exception
+ ↓
+finally
+ ↓
+Abnormal Termination
+```
+
+---
+
+# Real-Time Example
+
+## File Handling
+
+```python
+file = open("data.txt")
+
+try:
+    process file
+
+except:
+    handle errors
+
+finally:
+    file.close()
+```
+
+### Why?
+
+Whether:
+
+* Processing succeeds
+* Processing fails
+
+the file must be closed.
+
+---
+
+# Important Note
+
+There is only **one situation** where `finally` block may not execute.
+
+---
+
+## Using `os._exit()`
+
+When:
+
+```python
+os._exit()
+```
+
+is called,
+
+Python Virtual Machine (PVM) immediately shuts down.
+
+Therefore:
+
+```text
+finally block is skipped
+```
+
+---
+
+## Example
+
+```python
+import os
+
+try:
+    print("try")
+
+    os._exit(0)
+
+except NameError:
+    print("except")
+
+finally:
+    print("finally")
+```
+
+### Output
+
+```text
+try
+```
+
+---
+
+## Explanation
+
+Execution reaches:
+
+```python
+os._exit(0)
+```
+
+Python Virtual Machine stops immediately.
+
+Hence:
+
+```python
+finally
+```
+
+never executes.
+
+---
+
+# Control Flow of try-except-finally
+
+```text
+            try
+             |
+      Exception ?
+       /        \
+     No          Yes
+     |            |
+ Continue      Matching
+     |          except
+     |            |
+      \          /
+        finally
+           |
+       Program End
+```
+
+---
+
+# Comparison: try vs except vs finally
+
+| Block          | Purpose          | Executes When                   |
+| -------------- | ---------------- | ------------------------------- |
+| try            | Risky code       | Always                          |
+| except         | Handling code    | Only when exception occurs      |
+| finally        | Cleanup code     | Always                          |
+| default except | Generic handling | When no matching handler exists |
+
+---
+
+# Key Takeaways
+
+* `except:` without exception type is called:
+
+```text
+Default Exception Handler
+```
+
+* Default except should always be:
+
+```text
+Last except block
+```
+
+* `finally` is mainly used for:
+
+```text
+Cleanup code
+```
+
+* `finally` executes whether:
+
+  * Exception occurs
+  * Exception does not occur
+  * Exception is handled
+  * Exception is not handled
+
+* Typical cleanup tasks:
+
+  * Closing files
+  * Closing database connections
+  * Releasing network resources
+
+* Only exceptional case where finally may not execute:
+
+```python
+os._exit()
+```
+
+* `try` → Risky code
+* `except` → Error handling
+* `finally` → Cleanup code always executed
+# Control Flow in `try-except-finally`
+
+## General Structure
+
+```python
+try:
+    stmt1
+    stmt2
+    stmt3
+
+except ExceptionType:
+    stmt4
+
+finally:
+    stmt5
+    stmt6
+```
+
+---
+
+# Important Note About `os._exit(0)`
+
+```python
+os._exit(0)
+```
+
+### Meaning
+
+* `0` represents status code.
+* Status code `0` indicates:
+
+```text
+Normal Program Termination
+```
+
+Different status codes can be used to indicate different termination conditions.
+
+---
+
+# Case 1: No Exception
+
+### Execution Flow
+
+```text
+stmt1 → stmt2 → stmt3 → stmt5 → stmt6
+```
+
+### Execution Order
+
+```text
+1, 2, 3, 5, 6
+```
+
+### Result
+
+```text
+Normal Termination
+```
+
+---
+
+# Case 2: Exception Raised and Matching Except Found
+
+Suppose exception occurs at:
+
+```text
+stmt2
+```
+
+and matching handler exists.
+
+### Execution Flow
+
+```text
+stmt1
+↓
+Exception
+↓
+stmt4
+↓
+stmt5
+↓
+stmt6
+```
+
+### Execution Order
+
+```text
+1, 4, 5, 6
+```
+
+### Result
+
+```text
+Normal Termination
+```
+
+---
+
+# Case 3: Exception Raised but Matching Except Not Found
+
+Suppose exception occurs at:
+
+```text
+stmt2
+```
+
+and no matching handler exists.
+
+### Execution Flow
+
+```text
+stmt1
+↓
+Exception
+↓
+finally
+↓
+Program Terminates
+```
+
+### Execution Order
+
+```text
+1, 5
+```
+
+### Result
+
+```text
+Abnormal Termination
+```
+
+---
+
+# Case 4: Exception Raised Inside `except`
+
+Suppose exception occurs at:
+
+```text
+stmt4
+```
+
+inside the except block.
+
+### Execution Flow
+
+```text
+try
+↓
+except
+↓
+Exception
+↓
+finally
+↓
+Program Terminates
+```
+
+### Result
+
+```text
+Abnormal Termination
+```
+
+But before termination:
+
+```text
+finally block executes
+```
+
+---
+
+# Case 5: Exception Raised Inside `finally`
+
+Suppose exception occurs at:
+
+```text
+stmt5
+```
+
+or
+
+```text
+stmt6
+```
+
+### Result
+
+```text
+Abnormal Termination
+```
+
+because exception occurred inside finally block itself.
+
+---
+
+# Summary Diagram
+
+```text
+                try
+                 |
+           Exception ?
+          /          \
+        No            Yes
+        |             |
+      except?       Matching?
+        |          /       \
+        |        Yes       No
+        |         |         |
+        |      except    skip
+        |         |         |
+        +---------+---------+
+                  |
+              finally
+                  |
+          Program End
+```
+
+---
+
+# Nested try-except-finally Blocks
+
+## Definition
+
+Placing one:
+
+```text
+try-except-finally
+```
+
+block inside another:
+
+```text
+try-except-finally
+```
+
+block is called:
+
+```text
+Nested Exception Handling
+```
+
+---
+
+## General Structure
+
+```python
+try:
+
+    statements
+
+    try:
+        statements
+
+    except:
+        statements
+
+    finally:
+        statements
+
+except:
+    statements
+
+finally:
+    statements
+```
+
+---
+
+# Why Nested Exception Handling?
+
+Sometimes:
+
+* Program contains multiple risky operations.
+* Different levels require different handling.
+* Inner block handles local exceptions.
+* Outer block acts as backup handler.
+
+---
+
+# Rule
+
+### Outer Try Block
+
+Contains:
+
+```text
+General Risky Code
+```
+
+### Inner Try Block
+
+Contains:
+
+```text
+Highly Risky Code
+```
+
+---
+
+# Exception Handling Priority
+
+```text
+Inner Handler
+      ↓
+Outer Handler
+```
+
+Python always tries:
+
+```text
+Nearest Handler First
+```
+
+---
+
+# Example
+
+```python
+try:
+
+    print("Outer try block")
+
+    try:
+
+        print("Inner try block")
+
+        print(10/0)
+
+    except ZeroDivisionError:
+
+        print("Inner except block")
+
+    finally:
+
+        print("Inner finally block")
+
+except:
+
+    print("Outer except block")
+
+finally:
+
+    print("Outer finally block")
+```
+
+---
+
+## Output
+
+```text
+Outer try block
+
+Inner try block
+
+Inner except block
+
+Inner finally block
+
+Outer finally block
+```
+
+---
+
+# Explanation
+
+### Step 1
+
+Outer try executes.
+
+```text
+Outer try block
+```
+
+printed.
+
+---
+
+### Step 2
+
+Inner try executes.
+
+```text
+Inner try block
+```
+
+printed.
+
+---
+
+### Step 3
+
+Exception occurs.
+
+```python
+10/0
+```
+
+raises:
+
+```text
+ZeroDivisionError
+```
+
+---
+
+### Step 4
+
+Python searches nearest handler.
+
+Found:
+
+```python
+except ZeroDivisionError
+```
+
+inside inner block.
+
+---
+
+### Step 5
+
+Inner handler executes.
+
+```text
+Inner except block
+```
+
+printed.
+
+---
+
+### Step 6
+
+Inner finally executes.
+
+```text
+Inner finally block
+```
+
+printed.
+
+---
+
+### Step 7
+
+Control returns to outer block.
+
+Outer finally executes.
+
+```text
+Outer finally block
+```
+
+printed.
+
+---
+
+# Control Flow in Nested try-except-finally
+
+## Structure
+
+```python
+try:
+    stmt1
+    stmt2
+    stmt3
+
+    try:
+        stmt4
+        stmt5
+        stmt6
+
+    except X:
+        stmt7
+
+    finally:
+        stmt8
+        stmt9
+
+except Y:
+    stmt10
+
+finally:
+    stmt11
+    stmt12
+```
+
+---
+
+# Case 1: No Exception
+
+### Execution Order
+
+```text
+1,2,3,4,5,6,8,9,11,12
+```
+
+### Result
+
+```text
+Normal Termination
+```
+
+---
+
+# Case 2: Exception at stmt2 and Outer Handler Matches
+
+### Execution Order
+
+```text
+1,10,11,12
+```
+
+### Result
+
+```text
+Normal Termination
+```
+
+---
+
+# Case 3: Exception at stmt2 and Outer Handler Does Not Match
+
+### Execution Order
+
+```text
+1,11
+```
+
+### Result
+
+```text
+Abnormal Termination
+```
+
+---
+
+# Case 4: Exception at stmt5 and Inner Handler Matches
+
+### Execution Order
+
+```text
+1,2,3,4,7,8,9,11,12
+```
+
+### Result
+
+```text
+Normal Termination
+```
+
+---
+
+# Case 5: Exception at stmt5
+
+Inner handler does not match.
+
+Outer handler matches.
+
+### Execution Order
+
+```text
+1,2,3,4,8,10,11,12
+```
+
+### Result
+
+```text
+Normal Termination
+```
+
+---
+
+# Case 6: Exception at stmt5
+
+Neither inner nor outer handler matches.
+
+### Execution Order
+
+```text
+1,2,3,4,8,11
+```
+
+### Result
+
+```text
+Abnormal Termination
+```
+
+---
+
+# Case 7: Exception at stmt7 and Outer Handler Matches
+
+### Execution Order
+
+```text
+1,2,3,...,8,10,11,12
+```
+
+### Result
+
+```text
+Normal Termination
+```
+
+---
+
+# Case 8: Exception at stmt7 and Outer Handler Does Not Match
+
+### Execution Order
+
+```text
+1,2,3,...,8,11
+```
+
+### Result
+
+```text
+Abnormal Termination
+```
+
+---
+
+# Case 9: Exception at stmt8 and Outer Handler Matches
+
+### Execution Order
+
+```text
+1,2,3,...,10,11,12
+```
+
+### Result
+
+```text
+Normal Termination
+```
+
+---
+
+# Case 10: Exception at stmt8 and Outer Handler Does Not Match
+
+### Execution Order
+
+```text
+1,2,3,...,11
+```
+
+### Result
+
+```text
+Abnormal Termination
+```
+
+---
+
+# Real-Time Analogy
+
+Imagine a company hierarchy:
+
+```text
+Employee
+   ↓
+Team Lead
+   ↓
+Manager
+```
+
+If Employee cannot solve a problem:
+
+```text
+Escalate to Team Lead
+```
+
+If Team Lead cannot solve it:
+
+```text
+Escalate to Manager
+```
+
+Similarly:
+
+```text
+Inner Handler
+      ↓
+Outer Handler
+```
+
+This is exactly how nested exception handling works.
+
+---
+
+# Key Takeaways
+
+* `finally` executes whether exception occurs or not.
+* `finally` executes before abnormal termination.
+* Nested try-except-finally blocks are allowed.
+* Python always searches for the nearest exception handler first.
+* Inner exception handlers get higher priority.
+* If inner handler cannot handle exception, it propagates to outer handler.
+* Both inner and outer finally blocks execute when control passes through them.
+* Nested exception handling is useful for large applications with multiple risky operations.
+* `os._exit(0)` is a special case where finally block may not execute.
+
