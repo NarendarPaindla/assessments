@@ -2719,3 +2719,1499 @@ This is exactly how nested exception handling works.
 * Nested exception handling is useful for large applications with multiple risky operations.
 * `os._exit(0)` is a special case where finally block may not execute.
 
+# Control Flow in Nested `try-except-finally` (Continued)
+
+Consider the structure:
+
+```python
+try:
+    stmt1
+    stmt2
+    stmt3
+
+    try:
+        stmt4
+        stmt5
+        stmt6
+
+    except X:
+        stmt7
+
+    finally:
+        stmt8
+        stmt9
+
+except Y:
+    stmt10
+
+finally:
+    stmt11
+    stmt12
+```
+
+---
+
+# Case 11: Exception Raised at `stmt9` and Matching Outer `except` Found
+
+Suppose:
+
+```text
+Exception occurs at stmt9
+```
+
+and outer exception handler matches.
+
+### Execution Order
+
+```text
+1,2,3,....,8,10,11,12
+```
+
+### Result
+
+```text
+Normal Termination
+```
+
+---
+
+## Explanation
+
+Flow:
+
+```text
+Inner finally executes
+      ↓
+Exception at stmt9
+      ↓
+Outer except handles it
+      ↓
+Outer finally executes
+      ↓
+Program ends normally
+```
+
+---
+
+# Case 12: Exception Raised at `stmt9` and Outer `except` Does Not Match
+
+### Execution Order
+
+```text
+1,2,3,....,8,11
+```
+
+### Result
+
+```text
+Abnormal Termination
+```
+
+---
+
+## Explanation
+
+Flow:
+
+```text
+Exception in stmt9
+      ↓
+Outer except cannot handle
+      ↓
+Outer finally executes
+      ↓
+Program terminates
+```
+
+---
+
+# Case 13: Exception Raised at `stmt10`
+
+Suppose exception occurs inside:
+
+```text
+Outer except block
+```
+
+at:
+
+```text
+stmt10
+```
+
+### Result
+
+```text
+Abnormal Termination
+```
+
+However:
+
+```text
+stmt11 (finally)
+```
+
+will execute before termination.
+
+---
+
+## Flow
+
+```text
+Outer except
+      ↓
+Exception
+      ↓
+Outer finally
+      ↓
+Abnormal Termination
+```
+
+---
+
+# Case 14: Exception Raised at `stmt11` or `stmt12`
+
+Suppose exception occurs inside:
+
+```text
+Outer finally block
+```
+
+### Result
+
+```text
+Abnormal Termination
+```
+
+because exception occurred inside the final cleanup code itself.
+
+---
+
+# Important Note About Finally Block
+
+## Rule 1
+
+If control enters a:
+
+```python
+try
+```
+
+block,
+
+then:
+
+```python
+finally
+```
+
+block will definitely execute.
+
+---
+
+## Rule 2
+
+If control never enters:
+
+```python
+try
+```
+
+block,
+
+then:
+
+```python
+finally
+```
+
+block will not execute.
+
+---
+
+# `else` Block with `try-except-finally`
+
+Python also supports:
+
+```python
+else
+```
+
+with exception handling.
+
+---
+
+# Purpose of `else`
+
+The `else` block executes:
+
+```text
+Only when no exception occurs
+inside try block.
+```
+
+---
+
+# Structure
+
+```python
+try:
+    Risky Code
+
+except:
+    Handling Code
+
+else:
+    No Exception Code
+
+finally:
+    Cleanup Code
+```
+
+---
+
+# Responsibilities of Each Block
+
+| Block   | Purpose                           |
+| ------- | --------------------------------- |
+| try     | Risky code                        |
+| except  | Executes when exception occurs    |
+| else    | Executes when no exception occurs |
+| finally | Executes always                   |
+
+---
+
+# Flow Diagram
+
+```text
+                 try
+                   |
+            Exception ?
+            /       \
+          Yes        No
+          |           |
+       except       else
+          \           /
+           \         /
+             finally
+                 |
+               End
+```
+
+---
+
+# Example
+
+```python
+try:
+
+    print("try")
+
+    print(10/0)
+
+except:
+
+    print("except")
+
+else:
+
+    print("else")
+
+finally:
+
+    print("finally")
+```
+
+---
+
+## Output
+
+```text
+try
+except
+finally
+```
+
+---
+
+## Why `else` Not Executed?
+
+Because:
+
+```python
+print(10/0)
+```
+
+raised:
+
+```text
+ZeroDivisionError
+```
+
+Hence:
+
+```text
+else block skipped
+```
+
+---
+
+# Example Without Exception
+
+```python
+try:
+
+    print("try")
+
+    print(10/2)
+
+except:
+
+    print("except")
+
+else:
+
+    print("else")
+
+finally:
+
+    print("finally")
+```
+
+### Output
+
+```text
+try
+5.0
+else
+finally
+```
+
+---
+
+## Why?
+
+No exception occurred.
+
+Hence:
+
+```text
+else block executed
+```
+
+---
+
+# Comparison
+
+| Situation             | try | except  | else | finally |
+| --------------------- | --- | ------- | ---- | ------- |
+| No Exception          | Yes | No      | Yes  | Yes     |
+| Exception Handled     | Yes | Yes     | No   | Yes     |
+| Exception Not Handled | Yes | Partial | No   | Yes     |
+
+---
+
+# Various Possible Combinations of try-except-else-finally
+
+---
+
+## Rule 1
+
+Whenever we write:
+
+```python
+try
+```
+
+block,
+
+we must write at least one of:
+
+```python
+except
+```
+
+or
+
+```python
+finally
+```
+
+---
+
+### Invalid
+
+```python
+try:
+    print("Hello")
+```
+
+### Result
+
+```text
+Syntax Error
+```
+
+---
+
+## Rule 2
+
+Whenever we write:
+
+```python
+except
+```
+
+block,
+
+corresponding:
+
+```python
+try
+```
+
+block is mandatory.
+
+---
+
+### Invalid
+
+```python
+except:
+    print("Hello")
+```
+
+### Result
+
+```text
+Syntax Error
+```
+
+---
+
+## Rule 3
+
+Whenever we write:
+
+```python
+finally
+```
+
+block,
+
+corresponding:
+
+```python
+try
+```
+
+block is mandatory.
+
+---
+
+### Invalid
+
+```python
+finally:
+    print("Hello")
+```
+
+### Result
+
+```text
+Syntax Error
+```
+
+---
+
+## Rule 4
+
+We can write:
+
+```text
+Multiple except blocks
+```
+
+for a single try block.
+
+---
+
+### Valid
+
+```python
+try:
+    pass
+
+except ValueError:
+    pass
+
+except ZeroDivisionError:
+    pass
+```
+
+---
+
+## Rule 5
+
+We cannot write:
+
+```text
+Multiple finally blocks
+```
+
+for the same try.
+
+---
+
+### Invalid
+
+```python
+try:
+    pass
+
+finally:
+    pass
+
+finally:
+    pass
+```
+
+### Result
+
+```text
+Syntax Error
+```
+
+---
+
+## Rule 6
+
+If we write:
+
+```python
+else
+```
+
+then:
+
+```python
+except
+```
+
+must also be present.
+
+---
+
+### Invalid
+
+```python
+try:
+    pass
+
+else:
+    pass
+```
+
+### Result
+
+```text
+Syntax Error
+```
+
+---
+
+### Valid
+
+```python
+try:
+    pass
+
+except:
+    pass
+
+else:
+    pass
+```
+
+---
+
+## Rule 7
+
+Order of Blocks is Important
+
+Correct order:
+
+```python
+try
+except
+else
+finally
+```
+
+---
+
+### Valid
+
+```python
+try:
+    pass
+
+except:
+    pass
+
+else:
+    pass
+
+finally:
+    pass
+```
+
+---
+
+### Invalid
+
+```python
+try:
+    pass
+
+finally:
+    pass
+
+except:
+    pass
+```
+
+### Result
+
+```text
+Syntax Error
+```
+
+---
+
+## Rule 8
+
+Nesting is Possible
+
+We can define:
+
+```text
+try
+except
+else
+finally
+```
+
+inside:
+
+* try block
+* except block
+* else block
+* finally block
+
+---
+
+### Example
+
+```python
+try:
+
+    try:
+        pass
+
+    except:
+        pass
+
+finally:
+    pass
+```
+
+Valid.
+
+---
+
+# Valid and Invalid Combinations
+
+## Invalid
+
+### Only try
+
+```python
+try:
+    print("try")
+```
+
+Not allowed.
+
+---
+
+## Invalid
+
+### Only except
+
+```python
+except:
+    print("Hello")
+```
+
+Not allowed.
+
+---
+
+## Invalid
+
+### Only else
+
+```python
+else:
+    print("Hello")
+```
+
+Not allowed.
+
+---
+
+## Invalid
+
+### Only finally
+
+```python
+finally:
+    print("Hello")
+```
+
+Not allowed.
+
+---
+
+## Valid
+
+### try + except
+
+```python
+try:
+    print("try")
+
+except:
+    print("except")
+```
+
+Allowed.
+
+---
+
+## Valid
+
+### try + finally
+
+```python
+try:
+    print("try")
+
+finally:
+    print("finally")
+```
+
+Allowed.
+
+---
+
+# Real-Time Analogy
+
+Imagine an online payment system.
+
+### try
+
+```text
+Process Payment
+```
+
+### except
+
+```text
+Handle Failure
+```
+
+### else
+
+```text
+Send Success Message
+```
+
+### finally
+
+```text
+Close Connection
+Release Resources
+```
+
+Whether payment succeeds or fails:
+
+```text
+Connection must be closed
+```
+
+which is exactly the purpose of:
+
+```python
+finally
+```
+
+---
+
+# Key Takeaways
+
+* `else` executes only when no exception occurs.
+* `finally` executes whether exception occurs or not.
+* `try` must be followed by `except` or `finally`.
+* `except` cannot exist without `try`.
+* `finally` cannot exist without `try`.
+* Multiple `except` blocks are allowed.
+* Multiple `finally` blocks are not allowed.
+* `else` requires an `except` block.
+* Correct order:
+
+```text
+try → except → else → finally
+```
+
+* Nested try-except-else-finally blocks are fully supported.
+* If control enters `try`, corresponding `finally` will execute (except special cases like `os._exit()`).
+# Types of Exceptions in Python
+
+In Python, exceptions are broadly classified into:
+
+1. Predefined Exceptions
+2. User Defined Exceptions (Customized Exceptions)
+
+---
+
+# 1) Predefined Exceptions
+
+## Definition
+
+Predefined exceptions are also called:
+
+```text
+Built-in Exceptions
+```
+
+These exceptions are automatically raised by Python Virtual Machine (PVM) whenever a specific error condition occurs.
+
+---
+
+## Example 1: ZeroDivisionError
+
+When we divide a number by zero:
+
+```python
+print(10/0)
+```
+
+### Output
+
+```text
+ZeroDivisionError: division by zero
+```
+
+Python automatically raises:
+
+```text
+ZeroDivisionError
+```
+
+---
+
+## Example 2: ValueError
+
+When input cannot be converted to required datatype.
+
+```python
+x = int("ten")
+```
+
+### Output
+
+```text
+ValueError:
+invalid literal for int()
+```
+
+Python automatically raises:
+
+```text
+ValueError
+```
+
+---
+
+## Common Predefined Exceptions
+
+| Exception         | Description                |
+| ----------------- | -------------------------- |
+| ZeroDivisionError | Division by zero           |
+| ValueError        | Invalid value supplied     |
+| TypeError         | Invalid datatype operation |
+| IndexError        | Invalid index              |
+| KeyError          | Invalid dictionary key     |
+| FileNotFoundError | File not found             |
+| NameError         | Variable not defined       |
+
+---
+
+# 2) User Defined Exceptions
+
+## Definition
+
+User Defined Exceptions are also called:
+
+```text
+Customized Exceptions
+```
+
+or
+
+```text
+Programmatic Exceptions
+```
+
+These exceptions are created by programmers according to business requirements.
+
+Python does not know when these exceptions should occur.
+
+Therefore:
+
+```text
+Programmer must explicitly define
+and raise them.
+```
+
+---
+
+## Why User Defined Exceptions?
+
+Sometimes predefined exceptions are not enough.
+
+Business rules may require special validations.
+
+### Examples
+
+```text
+InsufficientFundsException
+
+InvalidInputException
+
+TooYoungException
+
+TooOldException
+
+InvalidAgeException
+
+LowAttendanceException
+```
+
+These exceptions are not available in Python by default.
+
+We must create them ourselves.
+
+---
+
+# Real-Time Example
+
+Consider an Online Banking System.
+
+### Rule
+
+Customer can withdraw money only if:
+
+```text
+Balance >= Withdrawal Amount
+```
+
+If balance is insufficient:
+
+```text
+InsufficientFundsException
+```
+
+should be raised.
+
+Python does not know this rule.
+
+Programmer must implement it.
+
+---
+
+# How to Define Customized Exceptions?
+
+Every exception in Python is a class.
+
+Custom exceptions should inherit from:
+
+```python
+Exception
+```
+
+class directly or indirectly.
+
+---
+
+## Syntax
+
+```python
+class CustomException(Exception):
+
+    def __init__(self, arg):
+        self.msg = arg
+```
+
+---
+
+## Explanation
+
+### CustomException
+
+Name of user-defined exception.
+
+---
+
+### Exception
+
+Parent class.
+
+---
+
+### self.msg
+
+Stores custom error message.
+
+---
+
+# Example: TooYoungException
+
+```python
+class TooYoungException(Exception):
+
+    def __init__(self, arg):
+        self.msg = arg
+```
+
+---
+
+## Class Diagram
+
+```text
+BaseException
+      |
+  Exception
+      |
+TooYoungException
+```
+
+---
+
+## Raising Exception
+
+Custom exceptions are raised using:
+
+```python
+raise
+```
+
+keyword.
+
+### Syntax
+
+```python
+raise ExceptionName("Message")
+```
+
+---
+
+## Example
+
+```python
+raise TooYoungException(
+    "Age is too low"
+)
+```
+
+---
+
+# Example: Marriage Eligibility System
+
+## Requirement
+
+### Rule 1
+
+If age is less than 18:
+
+```text
+TooYoungException
+```
+
+---
+
+### Rule 2
+
+If age is greater than 60:
+
+```text
+TooOldException
+```
+
+---
+
+### Rule 3
+
+Otherwise:
+
+```text
+Eligible
+```
+
+---
+
+## Program
+
+```python
+class TooYoungException(Exception):
+
+    def __init__(self, arg):
+        self.msg = arg
+
+
+class TooOldException(Exception):
+
+    def __init__(self, arg):
+        self.msg = arg
+
+
+age = int(input("Enter Age: "))
+
+if age < 18:
+
+    raise TooYoungException(
+        "Please wait some more time."
+    )
+
+elif age > 60:
+
+    raise TooOldException(
+        "Age crossed eligibility limit."
+    )
+
+else:
+
+    print(
+        "You will get match details soon."
+    )
+```
+
+---
+
+# Execution 1
+
+### Input
+
+```text
+Enter Age: 12
+```
+
+### Output
+
+```text
+TooYoungException:
+Please wait some more time.
+```
+
+---
+
+## Explanation
+
+Condition:
+
+```python
+age < 18
+```
+
+became:
+
+```text
+True
+```
+
+Therefore:
+
+```python
+raise TooYoungException(...)
+```
+
+executed.
+
+---
+
+# Execution 2
+
+### Input
+
+```text
+Enter Age: 90
+```
+
+### Output
+
+```text
+TooOldException:
+Age crossed eligibility limit.
+```
+
+---
+
+## Explanation
+
+Condition:
+
+```python
+age > 60
+```
+
+became:
+
+```text
+True
+```
+
+Therefore:
+
+```python
+raise TooOldException(...)
+```
+
+executed.
+
+---
+
+# Execution 3
+
+### Input
+
+```text
+Enter Age: 27
+```
+
+### Output
+
+```text
+You will get match details soon.
+```
+
+---
+
+## Explanation
+
+Age satisfies:
+
+```text
+18 ≤ Age ≤ 60
+```
+
+Therefore:
+
+No exception raised.
+
+---
+
+# How `raise` Works
+
+The `raise` keyword is used to:
+
+```text
+Explicitly create
+and throw an exception
+```
+
+---
+
+## General Syntax
+
+```python
+raise ExceptionType(
+    "Error Message"
+)
+```
+
+---
+
+## Example
+
+```python
+raise ValueError(
+    "Invalid Marks"
+)
+```
+
+---
+
+## Example
+
+```python
+raise Exception(
+    "Something Went Wrong"
+)
+```
+
+---
+
+# Real-Time Analogy
+
+Imagine a security guard at a company entrance.
+
+### Valid Employee
+
+```text
+Allow Entry
+```
+
+---
+
+### Unauthorized Person
+
+```text
+Raise Alarm
+```
+
+The alarm is similar to:
+
+```python
+raise Exception()
+```
+
+---
+
+# Important Note
+
+The `raise` keyword is mainly useful for:
+
+```text
+User Defined Exceptions
+```
+
+because Python does not know when they should occur.
+
+---
+
+### For Predefined Exceptions
+
+Python generally raises them automatically.
+
+Example:
+
+```python
+10 / 0
+```
+
+Python automatically raises:
+
+```text
+ZeroDivisionError
+```
+
+No need to use:
+
+```python
+raise ZeroDivisionError
+```
+
+manually in most situations.
+
+---
+
+# Exception Creation Flow
+
+```text
+Business Rule
+      |
+      v
+Condition Check
+      |
+      v
+Condition Failed?
+   /        \
+ No          Yes
+ |            |
+ Continue    raise Exception
+                |
+                v
+         Exception Object Created
+                |
+                v
+          Program Terminated
+          (unless handled)
+```
+
+---
+
+# Comparison: Predefined vs User Defined Exceptions
+
+| Predefined Exceptions      | User Defined Exceptions          |
+| -------------------------- | -------------------------------- |
+| Built into Python          | Created by Programmer            |
+| Raised automatically       | Raised manually using `raise`    |
+| Common runtime errors      | Business-rule validations        |
+| Example: ZeroDivisionError | Example: TooYoungException       |
+| Python knows when to raise | Programmer decides when to raise |
+
+---
+
+# Key Takeaways
+
+* Python supports:
+
+  * Predefined Exceptions
+  * User Defined Exceptions
+
+* Predefined exceptions are automatically raised by Python.
+
+* User defined exceptions are created by programmers.
+
+* Custom exceptions should inherit from:
+
+```python
+Exception
+```
+
+* Exceptions are raised using:
+
+```python
+raise
+```
+
+keyword.
+
+* Syntax:
+
+```python
+raise CustomException("message")
+```
+
+* Custom exceptions help implement business rules.
+
+* Examples:
+
+  * InsufficientFundsException
+  * InvalidInputException
+  * TooYoungException
+  * TooOldException
+
+* `raise` is especially useful for customized exceptions where Python has no built-in knowledge of the application's rules.
+
+<img width="342" height="282" alt="image" src="https://github.com/user-attachments/assets/1748e0d0-f19f-4aa1-a81a-c994f8d21fe5" />
+<img width="366" height="698" alt="image" src="https://github.com/user-attachments/assets/0d71b355-c9f2-49aa-9af8-1badf66d65c4" />
+<img width="353" height="692" alt="image" src="https://github.com/user-attachments/assets/422bbde8-2e56-405e-be23-14f7bc213027" />
+<img width="346" height="707" alt="image" src="https://github.com/user-attachments/assets/ad727f8a-1007-433f-9f67-5d74c00603c8" />
+<img width="343" height="262" alt="image" src="https://github.com/user-attachments/assets/16c74004-c013-49d4-9af8-8e0440c2b3bb" />
+
+
+
+
