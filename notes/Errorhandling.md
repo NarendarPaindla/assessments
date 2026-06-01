@@ -1,660 +1,621 @@
-# Error Handling in Python
+# Exception Handling in Python
+
+# What is an Exception?
 
 ## Definition
 
-**Error Handling** is the process of managing errors in a program so that the program **does not crash unexpectedly**.
+An **Exception** is an unwanted and unexpected event that occurs during program execution and disturbs the normal flow of the program.
 
 In simple words:
 
-```text id="k7m2xp"
-Error handling helps a program
-continue running even if an error occurs.
+```text
+Exception = Runtime Error
 ```
 
-Python uses:
-
-```text id="r4m9wx"
-try
-except
-else
-finally
-```
-
-for handling errors.
+When an exception occurs, the program execution may stop abnormally.
 
 ---
 
-# Why Error Handling?
+## Examples of Exceptions
 
-Suppose:
+Common exceptions in Python:
 
-```python id="m2p7qx"
-a = 10
-b = 0
+* `ZeroDivisionError`
+* `TypeError`
+* `ValueError`
+* `FileNotFoundError`
+* `EOFError`
 
-print(a / b)
+### Example
+
+```python
+print(10/0)
 ```
 
 ### Output
 
-```text id="t8m4wx"
-ZeroDivisionError:
-division by zero
-```
-
-Problem:
-
-```text id="x5p1rx"
-Program stops immediately
-```
-
-To prevent this, Python provides:
-
-```text id="n9m3qx"
-Error Handling
+```text
+ZeroDivisionError: division by zero
 ```
 
 ---
 
-# Types of Errors in Python
+# Why Exception Handling is Required?
 
-Python mainly has **3 types of errors**:
+It is highly recommended to handle exceptions.
 
-1. Syntax Errors
-2. Runtime Errors (Exceptions)
-3. Logical Errors
+## Main Objectives
 
----
+### 1. Graceful Termination
 
-# 1) Syntax Errors
+Program should not terminate abruptly.
 
-## Definition
+### 2. Resource Protection
 
-Syntax errors occur when Python rules are written incorrectly.
+Resources should not remain blocked.
 
-Example:
+Examples:
 
-```python id="w3m8wx"
-if True
-    print("Hello")
-```
+* Files
+* Database Connections
+* Network Connections
 
-### Output
+### 3. Alternative Execution
 
-```text id="p2m7qx"
-SyntaxError:
-invalid syntax
-```
-
-### Problem
-
-Colon `:` is missing.
-
-Correct Code:
-
-```python id="r8m4wx"
-if True:
-    print("Hello")
-```
+If one operation fails, we should provide an alternative way to continue execution.
 
 ---
 
-# 2) Runtime Errors (Exceptions)
+# Important Note
 
-## Definition
+Exception handling does not mean:
 
-Runtime errors occur during execution.
-
-Example:
-
-```python id="x1m9qx"
-print(10 / 0)
+```text
+Fixing the error
 ```
 
-### Output
+It means:
 
-```text id="g7p2rx"
+```text
+Providing an alternative solution
+so the program can continue.
+```
+
+---
+
+# Real-Time Example
+
+Suppose a program needs to read a file from:
+
+```text
+London Server
+```
+
+If the server is unavailable:
+
+```text
+FileNotFoundError
+```
+
+Instead of stopping the application:
+
+```text
+Use local backup file
+```
+
+and continue execution.
+
+This process is called:
+
+```text
+Exception Handling
+```
+
+---
+
+## Example
+
+```python
+try:
+    read file from London server
+except FileNotFoundError:
+    read local backup file
+```
+
+---
+
+# Questions
+
+### What is an Exception?
+
+An unwanted event that interrupts normal execution of a program.
+
+---
+
+### What is Exception Handling?
+
+Providing alternative code to continue execution when an exception occurs.
+
+---
+
+### What is the Purpose of Exception Handling?
+
+* Prevent abnormal termination
+* Continue execution
+* Improve reliability
+
+---
+
+# Default Exception Handling in Python
+
+## Important Points
+
+### 1. Every Exception is an Object
+
+In Python:
+
+```text
+Every Exception is an Object
+```
+
+---
+
+### 2. Every Exception Has a Corresponding Class
+
+Examples:
+
+```text
 ZeroDivisionError
-```
-
----
-
-## Common Runtime Errors
-
-| Error Type          | Meaning                |
-| ------------------- | ---------------------- |
-| `ZeroDivisionError` | Divide by zero         |
-| `NameError`         | Variable not found     |
-| `TypeError`         | Wrong datatype         |
-| `ValueError`        | Invalid value          |
-| `IndexError`        | Invalid index          |
-| `KeyError`          | Dictionary key missing |
-| `FileNotFoundError` | File not found         |
-
----
-
-### Example: `NameError`
-
-```python id="t4m7wx"
-print(name)
-```
-
-### Output
-
-```text id="y2m8qx"
-NameError:
-name 'name' is not defined
-```
-
----
-
-### Example: `TypeError`
-
-```python id="p1m9rx"
-print(10 + "20")
-```
-
-### Output
-
-```text id="g3m7wx"
 TypeError
+ValueError
 ```
 
-Reason:
-
-```text id="n8p4rx"
-Cannot add integer and string
-```
+are exception classes.
 
 ---
 
-### Example: `IndexError`
+### 3. Python Creates Exception Objects Automatically
 
-```python id="v5m2qx"
-numbers = [10, 20, 30]
+Whenever an exception occurs:
 
-print(numbers[5])
+```text
+Python creates exception object
+```
+
+and searches for handling code.
+
+---
+
+### 4. If Handling Code is Not Found
+
+Python:
+
+```text
+Terminates Program Abnormally
+```
+
+and prints exception information.
+
+---
+
+# Example: Default Exception Handling
+
+```python
+print("Hello")
+
+print(10/0)
+
+print("Hi")
 ```
 
 ### Output
 
-```text id="q9m1wx"
-IndexError
-```
+```text
+Hello
 
-Reason:
+Traceback (most recent call last):
 
-```text id="r6p8rx"
-Index 5 does not exist
-```
-
----
-
-# 3) Logical Errors
-
-## Definition
-
-Program runs successfully but gives wrong output.
-
-Example:
-
-```python id="m7p2qx"
-a = 10
-b = 20
-
-print(a - b)
-```
-
-Expected:
-
-```text id="j1m8wx"
-30
-```
-
-Actual:
-
-```text id="h4p7rx"
--10
-```
-
-Program runs, but logic is wrong.
-
----
-
-# Exception Handling in Python
-
-Python handles runtime errors using:
-
-```text id="x8m3qx"
-try
-except
+ZeroDivisionError: division by zero
 ```
 
 ---
 
-# `try` Block
+## Explanation
 
-## Definition
+### Step 1
 
-Code that may cause an error is written inside `try`.
+```python
+print("Hello")
+```
 
-Example:
+Output:
 
-```python id="w2m9wx"
-try:
-    print(10 / 0)
+```text
+Hello
 ```
 
 ---
 
-# `except` Block
+### Step 2
 
-## Definition
-
-If error occurs, control goes to `except`.
-
-Example:
-
-```python id="k5m1qx"
-try:
-    print(10 / 0)
-
-except ZeroDivisionError:
-    print("Cannot divide by zero")
+```python
+print(10/0)
 ```
 
-### Output
+Exception occurs:
 
-```text id="p8m4rx"
-Cannot divide by zero
-```
-
----
-
-## Step-by-Step Explanation
-
-### Try Executes
-
-```python id="g1m7wx"
-print(10 / 0)
-```
-
-Error occurs:
-
-```text id="x4p2rx"
+```text
 ZeroDivisionError
 ```
 
-Python jumps to:
+---
 
-```python id="r9m3qx"
-except ZeroDivisionError:
+### Step 3
+
+Program stops immediately.
+
+Hence:
+
+```python
+print("Hi")
+```
+
+is never executed.
+
+---
+
+# Important Observation
+
+When exception occurs:
+
+```text
+Remaining statements
+will not execute.
+```
+
+This is called:
+
+```text
+Abnormal Termination
+```
+
+---
+
+# Python Exception Hierarchy
+
+All exceptions in Python follow a hierarchy.
+
+<img width="757" height="562" alt="image" src="https://github.com/user-attachments/assets/d2d9d2f3-1ab3-4ea2-a0d9-12502faf6a50" />
+
+
+Other important exceptions:
+
+```text
+SystemExit
+GeneratorExit
+KeyboardInterrupt
+```
+
+are directly derived from:
+
+```text
+BaseException
+```
+
+---
+
+# Important Notes About Hierarchy
+
+### Every Exception is a Class
+
+Example:
+
+```python
+print(type(ZeroDivisionError))
 ```
 
 Output:
 
-```text id="m6p8wx"
-Cannot divide by zero
+```text
+<class 'type'>
 ```
-
-Program does not crash.
 
 ---
 
-# Syntax of Exception Handling
+### BaseException is the Root Class
 
-```python id="q2m7rx"
+All exception classes are children of:
+
+```text
+BaseException
+```
+
+either directly or indirectly.
+
+---
+
+### Most Programmers Focus On
+
+```text
+Exception
+```
+
+and its child classes.
+
+---
+
+# Customized Exception Handling Using try-except
+
+## Why Use try-except?
+
+Some code may generate exceptions.
+
+Such code is called:
+
+```text
+Risky Code
+```
+
+We place risky code inside:
+
+```python
+try
+```
+
+block.
+
+---
+
+### Syntax
+
+```python
 try:
-    risky code
+    Risky Code
 
-except ErrorType:
-    handling code
-```
-
----
-
-# Example 1: Division Program
-
-```python id="t5m9wx"
-try:
-    num = int(input("Enter Number: "))
-    result = 100 / num
-    print(result)
-
-except ZeroDivisionError:
-    print("Cannot divide by zero")
-```
-
----
-
-# Multiple `except` Blocks
-
-We can handle different errors separately.
-
-Example:
-
-```python id="v1m8qx"
-try:
-    a = int(input("Enter Number: "))
-    print(10 / a)
-
-except ZeroDivisionError:
-    print("Cannot divide by zero")
-
-except ValueError:
-    print("Invalid Input")
-```
-
----
-
-## Explanation
-
-### Case 1
-
-Input:
-
-```text id="n3m7wx"
-0
-```
-
-Output:
-
-```text id="r8p2rx"
-Cannot divide by zero
-```
-
----
-
-### Case 2
-
-Input:
-
-```text id="g4m9qx"
-abc
-```
-
-Output:
-
-```text id="t7p1rx"
-Invalid Input
-```
-
----
-
-# Generic `except`
-
-Handles any error.
-
-Example:
-
-```python id="p2m8wx"
-try:
-    print(10 / 0)
-
-except Exception as e:
-    print(e)
-```
-
-### Output
-
-```text id="m9p4rx"
-division by zero
-```
-
----
-
-## Explanation
-
-```python id="w6m2qx"
-Exception as e
-```
-
-Stores error message in:
-
-```text id="k1m7wx"
-e
-```
-
----
-
-# `else` Block
-
-## Definition
-
-Runs only if **no exception occurs**.
-
-Example:
-
-```python id="x5p8rx"
-try:
-    num = 10 / 2
-
-except ZeroDivisionError:
-    print("Error")
-
-else:
-    print("Success")
-```
-
-### Output
-
-```text id="q7m1wx"
-Success
-```
-
----
-
-# `finally` Block
-
-## Definition
-
-Always executes whether error occurs or not.
-
-Example:
-
-```python id="r3m9qx"
-try:
-    print(10 / 0)
-
-except:
-    print("Error")
-
-finally:
-    print("Program Finished")
-```
-
-### Output
-
-```text id="v8m2wx"
-Error
-Program Finished
-```
-
----
-
-# Complete Example
-
-```python id="n4p7rx"
-try:
-    number = int(input("Enter Number: "))
-
-    result = 100 / number
-
-except ZeroDivisionError:
-    print("Cannot divide by zero")
-
-except ValueError:
-    print("Enter valid number")
-
-else:
-    print("Result:", result)
-
-finally:
-    print("Execution Completed")
+except ExceptionType:
+    Handling Code
 ```
 
 ---
 
 # Flow Diagram
 
-```text id="t2m8qx"
-        try
-          │
-    Error Occurs?
-       /      \
-     Yes       No
-      │         │
-   except      else
-      │         │
-       \       /
-         finally
+```text
+           try block
+                |
+        Exception?
+           /     \
+         Yes      No
+          |        |
+     except     Continue
+          |
+   Alternative Code
 ```
 
 ---
 
-# Real-Life Analogy
+# Example Without try-except
 
-Imagine ATM withdrawal.
+```python
+print("stmt-1")
 
-```text id="g9m4wx"
-try → Withdraw money
+print(10/0)
 
-except → Handle problems
-          (wrong PIN, no balance)
-
-else → Cash received
-
-finally → Card returned
+print("stmt-3")
 ```
 
-No matter what happens:
+### Output
 
-```text id="y1p7rx"
-Card is returned
-```
+```text
+stmt-1
 
-Similarly:
+ZeroDivisionError: division by zero
 
-```text id="w5m2qx"
-finally always executes
+Abnormal Termination
 ```
 
 ---
 
-# Important Rules
+## Explanation
 
-### 1. `try` must have `except` or `finally`
+Execution:
 
-Correct:
+```text
+stmt-1
+```
 
-```python id="r2m9wx"
+prints successfully.
+
+---
+
+Then:
+
+```python
+10/0
+```
+
+raises:
+
+```text
+ZeroDivisionError
+```
+
+Program terminates.
+
+---
+
+Hence:
+
+```text
+stmt-3
+```
+
+is not executed.
+
+---
+
+# Example With try-except
+
+```python
+print("stmt-1")
+
 try:
-    pass
+    print(10/0)
 
-except:
-    pass
+except ZeroDivisionError:
+    print(10/2)
+
+print("stmt-3")
+```
+
+### Output
+
+```text
+stmt-1
+
+5.0
+
+stmt-3
+
+Normal Termination
 ```
 
 ---
 
-### 2. Multiple `except` allowed
+## Step-by-Step Execution
 
-Example:
+### Step 1
 
-```python id="x8m1qx"
-except ValueError:
-except TypeError:
+```python
+print("stmt-1")
+```
+
+Output:
+
+```text
+stmt-1
 ```
 
 ---
 
-### 3. `finally` always runs
+### Step 2
 
-Even if error occurs.
+Control enters:
 
----
+```python
+try
+```
 
-### 4. `else` runs only if no error
-
----
-
-# `try`, `except`, `else`, `finally`
-
-| Block     | Purpose          |
-| --------- | ---------------- |
-| `try`     | Risky code       |
-| `except`  | Handle error     |
-| `else`    | Runs if no error |
-| `finally` | Always runs      |
+block.
 
 ---
 
-# Common Interview Questions
+### Step 3
 
-### Q1: What is Error Handling?
+```python
+print(10/0)
+```
 
-**Answer:**
-Error handling is the process of managing runtime errors to prevent program crashes.
+raises:
 
----
-
-### Q2: What is the purpose of `try` block?
-
-**Answer:**
-It contains code that may generate exceptions.
+```text
+ZeroDivisionError
+```
 
 ---
 
-### Q3: When does `else` execute?
+### Step 4
 
-**Answer:**
-Only if no exception occurs.
+Python searches matching:
 
----
+```python
+except ZeroDivisionError
+```
 
-### Q4: Does `finally` always execute?
-
-**Answer:**
-Yes.
+block.
 
 ---
 
-### Q5: Difference between Syntax Error and Runtime Error?
+### Step 5
 
-| Syntax Error            | Runtime Error           |
-| ----------------------- | ----------------------- |
-| Occurs before execution | Occurs during execution |
-| Wrong syntax            | Unexpected issue        |
+Handling code executes:
+
+```python
+print(10/2)
+```
+
+Output:
+
+```text
+5.0
+```
+
+---
+
+### Step 6
+
+Program continues normally.
+
+```python
+print("stmt-3")
+```
+
+Output:
+
+```text
+stmt-3
+```
+
+---
+
+### Result
+
+Program terminates successfully.
+
+```text
+Graceful Termination
+```
+
+---
+
+# Real-Time Analogy
+
+Imagine driving a car.
+
+Without exception handling:
+
+```text
+Road Block Found
+→ Journey Ends
+```
+
+With exception handling:
+
+```text
+Road Block Found
+→ Take Alternative Route
+→ Reach Destination
+```
+
+The alternative route is similar to:
+
+```python
+except block
+```
 
 ---
 
 # Key Takeaways
 
-* Errors are mainly:
-
-  1. Syntax Errors
-  2. Runtime Errors
-  3. Logical Errors
-
-* Runtime errors are called **Exceptions**.
-
-* Python handles exceptions using:
-
-```python id="q4m8rx"
-try
-except
-else
-finally
-```
-
-* `try` → risky code
-
-* `except` → handles errors
-
-* `else` → executes if no error
-
-* `finally` → always executes
-
-* Multiple exceptions can be handled separately.
-
-* `Exception as e` helps display error messages.
+* Exception = Runtime Error.
+* Exceptions disturb normal execution.
+* Every exception is an object.
+* Every exception belongs to an exception class.
+* `BaseException` is the root of all exception classes.
+* Default exception handling causes abnormal termination.
+* Remaining statements are not executed after an unhandled exception.
+* `try` block contains risky code.
+* `except` block contains handling code.
+* Exception handling provides an alternative path for execution.
+* Exception handling helps achieve graceful program termination.
+* Exception handling does not fix errors; it handles them and allows the program to continue.
