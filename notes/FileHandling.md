@@ -2515,3 +2515,637 @@ Using the `os` module, we can:
   * Delete
   * Navigate
   * List contents
+
+# Working with Directories in Python
+
+A **directory** is another name for a folder. Python provides the **os** module to perform directory-related operations.
+
+Common operations:
+
+1. Know current working directory
+2. Create a directory
+3. Create nested directories
+4. Delete directories
+5. Rename directories
+6. List directory contents
+7. Walk through directory tree
+
+---
+
+# Q1) Know Current Working Directory
+
+## Purpose
+
+Returns the current directory from which the Python program is running.
+
+### Program
+
+```python
+import os
+
+cwd = os.getcwd()
+
+print("Current Working Directory:", cwd)
+```
+
+### Explanation
+
+```python
+os.getcwd()
+```
+
+returns the current working directory path.
+
+### Example Output
+
+```text
+Current Working Directory:
+D:\Python_classes
+```
+
+---
+
+# Q2) Create a Sub Directory in Current Working Directory
+
+## Program
+
+```python
+import os
+
+os.mkdir("mysub")
+
+print("mysub directory created")
+```
+
+### Explanation
+
+```python
+os.mkdir()
+```
+
+creates a single directory.
+
+### Directory Structure
+
+Before:
+
+```text
+Current Directory
+```
+
+After:
+
+```text
+Current Directory
+|
+└── mysub
+```
+
+---
+
+# Q3) Create a Sub Directory inside Another Directory
+
+## Directory Structure
+
+```text
+cwd
+|
+└── mysub
+     |
+     └── mysub2
+```
+
+### Program
+
+```python
+import os
+
+os.mkdir("mysub/mysub2")
+
+print("mysub2 created inside mysub")
+```
+
+### Note
+
+`mysub` must already exist.
+
+Otherwise:
+
+```text
+FileNotFoundError
+```
+
+may occur.
+
+---
+
+# Q4) Create Multiple Directories at Once
+
+## Directory Structure
+
+```text
+sub1
+|
+└── sub2
+     |
+     └── sub3
+```
+
+### Program
+
+```python
+import os
+
+os.makedirs("sub1/sub2/sub3")
+
+print("sub1, sub2 and sub3 created")
+```
+
+---
+
+## Difference Between mkdir() and makedirs()
+
+| mkdir()               | makedirs()                   |
+| --------------------- | ---------------------------- |
+| Creates one directory | Creates multiple directories |
+| Parent must exist     | Creates complete path        |
+
+---
+
+# Q5) Remove a Directory
+
+### Program
+
+```python
+import os
+
+os.rmdir("mysub/mysub2")
+
+print("mysub2 removed")
+```
+
+### Important Note
+
+Directory must be empty.
+
+Otherwise:
+
+```text
+OSError
+```
+
+will occur.
+
+---
+
+# Q6) Remove Multiple Directories
+
+### Program
+
+```python
+import os
+
+os.removedirs("sub1/sub2/sub3")
+
+print("sub1, sub2 and sub3 removed")
+```
+
+### Explanation
+
+Removes all empty directories in the given path.
+
+---
+
+# Q7) Rename a Directory
+
+### Program
+
+```python
+import os
+
+os.rename("mysub", "newdir")
+
+print("Directory renamed")
+```
+
+### Before
+
+```text
+mysub
+```
+
+### After
+
+```text
+newdir
+```
+
+---
+
+# Q8) Know Contents of a Directory
+
+Python provides:
+
+```python
+os.listdir()
+```
+
+to display contents of a directory.
+
+---
+
+## Program
+
+```python
+import os
+
+print(os.listdir("."))
+```
+
+### Output Example
+
+```python
+[
+ 'abc.py',
+ 'students.txt',
+ 'emp.csv',
+ 'files.zip',
+ 'newdir'
+]
+```
+
+---
+
+## Important Point
+
+`listdir()` displays:
+
+* Files
+* Directories
+
+But it does NOT display contents inside subdirectories.
+
+---
+
+# Q9) Display Contents Including Subdirectories
+
+For this Python provides:
+
+```python
+os.walk()
+```
+
+---
+
+## Syntax
+
+```python
+os.walk(
+    path,
+    topdown=True,
+    onerror=None,
+    followlinks=False
+)
+```
+
+---
+
+## Parameters
+
+| Parameter   | Meaning                    |
+| ----------- | -------------------------- |
+| path        | Directory Path             |
+| topdown     | Traverse top to bottom     |
+| onerror     | Function executed on error |
+| followlinks | Follow symbolic links      |
+
+---
+
+## Program
+
+```python
+import os
+
+for dirpath, dirnames, filenames in os.walk("."):
+
+    print("Directory Path:", dirpath)
+
+    print("Directories:", dirnames)
+
+    print("Files:", filenames)
+
+    print()
+```
+
+---
+
+## Sample Output
+
+```text
+Directory Path: .
+
+Directories:
+['com', 'newdir', '__pycache__']
+
+Files:
+['abc.txt', 'demo.py', 'emp.csv']
+
+Directory Path: .\com
+
+Directories:
+['durgasoft']
+
+Files:
+['module1.py']
+```
+
+---
+
+# Difference Between listdir() and walk()
+
+| listdir()                                  | walk()                                       |
+| ------------------------------------------ | -------------------------------------------- |
+| Displays only specified directory contents | Displays directory and subdirectory contents |
+| Simple listing                             | Recursive traversal                          |
+| Returns list                               | Returns iterator                             |
+
+---
+
+# Running Other Programs from Python
+
+Python provides:
+
+```python
+os.system()
+```
+
+to execute operating system commands.
+
+---
+
+## Syntax
+
+```python
+os.system("command")
+```
+
+---
+
+## Example
+
+### Display Python Files
+
+```python
+import os
+
+os.system("dir *.py")
+```
+
+---
+
+### Run Another Python Program
+
+```python
+import os
+
+os.system("py abc.py")
+```
+
+---
+
+# Getting Information About a File
+
+Python provides:
+
+```python
+os.stat()
+```
+
+to get information about a file.
+
+---
+
+## Syntax
+
+```python
+stats = os.stat("abc.txt")
+```
+
+---
+
+# Important File Statistics
+
+| Property | Meaning              |
+| -------- | -------------------- |
+| st_mode  | Protection Bits      |
+| st_ino   | Inode Number         |
+| st_dev   | Device               |
+| st_nlink | Number of Hard Links |
+| st_uid   | User ID              |
+| st_gid   | Group ID             |
+| st_size  | File Size            |
+| st_atime | Last Access Time     |
+| st_mtime | Last Modified Time   |
+| st_ctime | Metadata Change Time |
+
+---
+
+# Program to Print All Statistics
+
+```python
+import os
+
+stats = os.stat("abc.txt")
+
+print(stats)
+```
+
+### Sample Output
+
+```text
+os.stat_result(
+st_mode=33206,
+st_ino=844424930132788,
+st_size=22410,
+st_atime=1505451446,
+st_mtime=1505538999
+)
+```
+
+---
+
+# Program to Print Selected Properties
+
+```python
+import os
+from datetime import *
+
+stats = os.stat("abc.txt")
+
+print(
+    "File Size:",
+    stats.st_size
+)
+
+print(
+    "Last Accessed:",
+    datetime.fromtimestamp(
+        stats.st_atime
+    )
+)
+
+print(
+    "Last Modified:",
+    datetime.fromtimestamp(
+        stats.st_mtime
+    )
+)
+```
+
+### Output
+
+```text
+File Size: 22410
+
+Last Accessed:
+2017-09-15 10:27:26
+
+Last Modified:
+2017-09-16 10:46:39
+```
+
+---
+
+# Understanding Timestamps
+
+Suppose a file was:
+
+* Created on Monday
+* Opened on Tuesday
+* Modified on Wednesday
+
+Then:
+
+```python
+stats.st_atime
+```
+
+returns Tuesday's timestamp.
+
+---
+
+```python
+stats.st_mtime
+```
+
+returns Wednesday's timestamp.
+
+---
+
+# Pickling and Unpickling Objects
+
+Sometimes we need to store an entire Python object permanently into a file and retrieve it later.
+
+This process is called:
+
+| Operation  | Meaning                        |
+| ---------- | ------------------------------ |
+| Pickling   | Writing object state to file   |
+| Unpickling | Reading object state from file |
+
+---
+
+## Real-Time Example
+
+Suppose an application stores:
+
+```python
+student = {
+    "id": 101,
+    "name": "Rahul",
+    "marks": 95
+}
+```
+
+Instead of writing field by field, we can save the entire object using Pickling.
+
+---
+
+# Python Module
+
+```python
+import pickle
+```
+
+---
+
+# Important Functions
+
+| Function      | Purpose                   |
+| ------------- | ------------------------- |
+| pickle.dump() | Store object into file    |
+| pickle.load() | Retrieve object from file |
+
+---
+
+## Syntax for Pickling
+
+```python
+pickle.dump(object, file)
+```
+
+---
+
+## Syntax for Unpickling
+
+```python
+object = pickle.load(file)
+```
+
+---
+
+# Visual Representation
+
+```text
+Python Object
+      |
+      | dump()
+      ↓
+Binary File
+      |
+      | load()
+      ↓
+Python Object
+```
+
+---
+
+# Key Takeaways
+
+* `os.getcwd()` → Current directory path
+* `mkdir()` → Create one directory
+* `makedirs()` → Create multiple directories
+* `rmdir()` → Remove one directory
+* `removedirs()` → Remove multiple directories
+* `rename()` → Rename directory
+* `listdir()` → List current directory contents
+* `walk()` → Traverse directories recursively
+* `system()` → Execute OS commands
+* `stat()` → Retrieve file information
+* `st_size` → File size
+* `st_atime` → Last access time
+* `st_mtime` → Last modification time
+* Pickling = Store Python object into file
+* Unpickling = Read Python object from file
+* Module used for serialization:
+
+```python
+import pickle
+```
+
+* Important functions:
+
+```python
+pickle.dump()
+pickle.load()
+```
