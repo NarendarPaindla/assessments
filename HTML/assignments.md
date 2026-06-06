@@ -18,7 +18,7 @@
 # Assignment -6
 <img width="1521" height="672" alt="image" src="https://github.com/user-attachments/assets/318177e6-a6db-4b9c-89b3-2c7827332b5a" />
 
-
 # Assignment -7
-<img width="490" height="582" alt="image" src="https://github.com/user-attachments/assets/c1616198-af04-4df2-b3a3-95e089f5eae3" />
+<img width="541" height="576" alt="image" src="https://github.com/user-attachments/assets/a390697d-1c82-462c-a307-7a1882ec6c69" />
+
 
