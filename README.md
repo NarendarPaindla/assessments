@@ -8,6 +8,8 @@
 
 [assignment](https://forms.gle/hSUFoZEyEyFBNM569)
 
+[flexbox](https://codingfantasy.com/games/flexboxadventure/play)
+
 ---`
 
 ---
