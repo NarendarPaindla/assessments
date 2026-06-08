@@ -21,4 +21,8 @@
 # Assignment -7
 <img width="541" height="576" alt="image" src="https://github.com/user-attachments/assets/a390697d-1c82-462c-a307-7a1882ec6c69" />
 
+# Assignment-8
+<img width="1387" height="788" alt="image" src="https://github.com/user-attachments/assets/6aad8d7d-b04d-4aa4-82f2-fe8be7cf49b7" />
+
+
 
