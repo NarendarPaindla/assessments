@@ -462,8 +462,146 @@ const players = [
   }
 ];
 
-const display=players.map((player)=>{
-  console.log(`Player Name : ${player.name}`)
+// const display=players.map((player)=>{
+//   console.log(`Player Name : ${player.name}`)
+//   console.log(`Score : ${player.score}`)
+//   console.log(`Balls : ${player.balls}`)
+//   console.log(`sixes : ${player.sixes}`)
+//   console.log(`fours : ${player.fours}`)
+//   console.log(`Format: ${player.format}`)
+//   console.log(`strike rate : ${player.strike_rate}`)
+// })
+
+
+// const teamIndia=players.filter((player)=>{
+//    return player.team==="India";
+// }).map((player)=>{
+//   console.log("==========================")
+//     console.log(`Player Name : ${player.name}`)
+//   console.log(`Score : ${player.score}`)
+//   console.log(`Balls : ${player.balls}`)
+//   console.log(`sixes : ${player.sixes}`)
+//   console.log(`fours : ${player.fours}`)
+//   console.log(`Format: ${player.format}`)
+//   console.log(`strike rate : ${player.strike_rate}`)
+// })
+
+
+// 1st statement
+
+// const teamIndia=players.filter((player)=>{
+//    return player.sixes>5;
+// }).map((player)=>{
+//   console.log("==========================")
+//     console.log(`Player Name : ${player.name}`)
+//   console.log(`Score : ${player.score}`)
+//   console.log(`Balls : ${player.balls}`)
+//   console.log(`sixes : ${player.sixes}`)
+//   console.log(`fours : ${player.fours}`)
+//   console.log(`Format: ${player.format}`)
+//   console.log(`strike rate : ${player.strike_rate}`)
+// })
+
+
+//2nd statement
+// const teamIndia=players.filter((player)=>{
+//    return player.score>50;
+// }).map((player)=>{
+//   console.log("==========================")
+//     console.log(`Player Name : ${player.name}`)
+//   console.log(`Score : ${player.score}`)
+//   console.log(`Balls : ${player.balls}`)
+//   console.log(`sixes : ${player.sixes}`)
+//   console.log(`fours : ${player.fours}`)
+//   console.log(`Format: ${player.format}`)
+//   console.log(`strike rate : ${player.strike_rate}`)
+// })
+
+//3rd statement
+
+// const teamIndia=players.filter((player)=>{
+//    return player.balls<25;
+// }).map((player)=>{
+//   console.log("==========================")
+//     console.log(`Player Name : ${player.name}`)
+//   console.log(`Score : ${player.score}`)
+//   console.log(`Balls : ${player.balls}`)
+//   console.log(`sixes : ${player.sixes}`)
+//   console.log(`fours : ${player.fours}`)
+//   console.log(`Format: ${player.format}`)
+//   console.log(`strike rate : ${player.strike_rate}`)
+// })
+
+
+//4th statement
+
+// const teamIndia=players.filter((player)=>{
+//    return player.wickets>3;
+// }).map((player)=>{
+//   console.log("==========================")
+//     console.log(`Player Name : ${player.name}`)
+//   console.log(`Score : ${player.score}`)
+//   console.log(`Balls : ${player.balls}`)
+//   console.log(`sixes : ${player.sixes}`)
+//   console.log(`fours : ${player.fours}`)
+//   console.log(`Format: ${player.format}`)
+//   console.log(`wickets: ${player.wickets}`)
+//   console.log(`strike rate : ${player.strike_rate}`)
+// })
+
+//5th statement
+
+// const teamIndia=players.filter((player)=>{
+//    return player.format==="T20";
+// }).map((player)=>{
+//   console.log("==========================")
+//     console.log(`Player Name : ${player.name}`)
+//   console.log(`Score : ${player.score}`)
+//   console.log(`Balls : ${player.balls}`)
+//   console.log(`sixes : ${player.sixes}`)
+//   console.log(`fours : ${player.fours}`)
+//   console.log(`Format: ${player.format}`)
+//   console.log(`strike rate : ${player.strike_rate}`)
+// })
+
+
+//6th statement
+// const teamIndia=players.filter((player)=>{
+//    return player.fours>14;
+// }).map((player)=>{
+//   console.log("==========================")
+//     console.log(`Player Name : ${player.name}`)
+//   console.log(`Score : ${player.score}`)
+//   console.log(`Balls : ${player.balls}`)
+//   console.log(`sixes : ${player.sixes}`)
+//   console.log(`fours : ${player.fours}`)
+//   console.log(`Format: ${player.format}`)
+//   console.log(`strike rate : ${player.strike_rate}`)
+// })
+
+//7th statement
+
+// const teamIndia=players.filter((player)=>{
+//    return player.format==="Test";
+// }).map((player)=>{
+//   console.log("==========================")
+//     console.log(`Player Name : ${player.name}`)
+//   console.log(`Score : ${player.score}`)
+//   console.log(`Balls : ${player.balls}`)
+//   console.log(`sixes : ${player.sixes}`)
+//   console.log(`fours : ${player.fours}`)
+//   console.log(`Format: ${player.format}`)
+//   console.log(`strike rate : ${player.strike_rate}`)
+// })
+
+
+//8th statement
+
+const teamIndia=players.filter((player)=>{
+   return player.strike_rate>150;
+}).map((player)=>{
+  console.log("==========================")
+    console.log(`Player Name : ${player.name}`)
   console.log(`Score : ${player.score}`)
   console.log(`Balls : ${player.balls}`)
   console.log(`sixes : ${player.sixes}`)
