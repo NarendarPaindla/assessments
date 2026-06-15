@@ -1491,3 +1491,637 @@ Promise.resolve("Hello")
 
 ---
 
+# Promise Utility Methods (Very Important)
+
+Until now, we worked with a single Promise.
+
+Example:
+
+```javascript
+fetchUser()
+.then(user => {
+    console.log(user);
+});
+```
+
+But in real applications, we often need to execute **multiple Promises simultaneously**.
+
+Examples:
+
+```text
+Get User Data
+Get Orders
+Get Notifications
+Get Messages
+```
+
+Instead of waiting one by one, we can execute them together.
+
+JavaScript provides:
+
+```javascript
+Promise.all()
+Promise.race()
+Promise.allSettled()
+Promise.any()
+```
+
+These are extremely important for interviews and real projects.
+
+---
+
+# 1. Promise.all()
+
+## What Does It Do?
+
+Waits for ALL Promises to complete successfully.
+
+```text
+Promise 1 ✓
+Promise 2 ✓
+Promise 3 ✓
+        ↓
+Return All Results
+```
+
+If even one Promise fails:
+
+```text
+Promise 1 ✓
+Promise 2 ❌
+Promise 3 ✓
+        ↓
+Entire Promise.all() Fails
+```
+
+---
+
+# Syntax
+
+```javascript
+Promise.all([
+    promise1,
+    promise2,
+    promise3
+])
+.then(results => {
+    console.log(results);
+});
+```
+
+---
+
+# Example 1
+
+```javascript
+const p1 = Promise.resolve("User");
+const p2 = Promise.resolve("Orders");
+const p3 = Promise.resolve("Payment");
+
+Promise.all([p1, p2, p3])
+.then((results) => {
+    console.log(results);
+});
+```
+
+Output:
+
+```javascript
+[
+ "User",
+ "Orders",
+ "Payment"
+]
+```
+
+---
+
+# Visualization
+
+```text
+User     ✓
+Orders   ✓
+Payment  ✓
+     ↓
+Return Array
+```
+
+---
+
+# Example 2 (Using setTimeout)
+
+```javascript
+const p1 = new Promise((resolve) => {
+    setTimeout(() => resolve("A"), 3000);
+});
+
+const p2 = new Promise((resolve) => {
+    setTimeout(() => resolve("B"), 1000);
+});
+
+const p3 = new Promise((resolve) => {
+    setTimeout(() => resolve("C"), 2000);
+});
+
+Promise.all([p1,p2,p3])
+.then((data)=>{
+    console.log(data);
+});
+```
+
+Output after 3 seconds:
+
+```javascript
+["A","B","C"]
+```
+
+Notice:
+
+Even though B finished first,
+
+```text
+B → 1 sec
+C → 2 sec
+A → 3 sec
+```
+
+Result order remains:
+
+```javascript
+["A","B","C"]
+```
+
+because Promise.all preserves original order.
+
+---
+
+# If One Promise Fails
+
+```javascript
+const p1 = Promise.resolve("User");
+
+const p2 = Promise.reject("Database Error");
+
+const p3 = Promise.resolve("Orders");
+
+Promise.all([p1,p2,p3])
+.catch((error)=>{
+    console.log(error);
+});
+```
+
+Output:
+
+```javascript
+Database Error
+```
+
+Entire operation fails.
+
+---
+
+# Real World Example
+
+Load dashboard data:
+
+```text
+User Profile
+Notifications
+Messages
+Settings
+```
+
+Instead of:
+
+```javascript
+getUser()
+.then(() => getNotifications())
+.then(() => getMessages())
+```
+
+Use:
+
+```javascript
+Promise.all([
+    getUser(),
+    getNotifications(),
+    getMessages()
+]);
+```
+
+Much faster.
+
+---
+
+# 2. Promise.race()
+
+## What Does It Do?
+
+Returns the FIRST settled Promise.
+
+Settled means:
+
+```text
+Resolved
+OR
+Rejected
+```
+
+Whichever happens first wins.
+
+---
+
+# Example
+
+```javascript
+const p1 = new Promise((resolve)=>{
+    setTimeout(()=>{
+        resolve("A");
+    },3000);
+});
+
+const p2 = new Promise((resolve)=>{
+    setTimeout(()=>{
+        resolve("B");
+    },1000);
+});
+
+Promise.race([p1,p2])
+.then((result)=>{
+    console.log(result);
+});
+```
+
+Output:
+
+```javascript
+B
+```
+
+Because:
+
+```text
+A → 3 sec
+
+B → 1 sec
+```
+
+B wins.
+
+---
+
+# Visualization
+
+```text
+A ------- 3 sec
+
+B -- 1 sec
+     ↓
+Winner
+```
+
+---
+
+# Race With Rejection
+
+```javascript
+const p1 = new Promise((resolve)=>{
+    setTimeout(()=>{
+        resolve("Success");
+    },3000);
+});
+
+const p2 = new Promise((reject)=>{
+    setTimeout(()=>{
+        reject("Failed");
+    },1000);
+});
+```
+
+Actually correct reject syntax:
+
+```javascript
+const p2 = new Promise((resolve,reject)=>{
+    setTimeout(()=>{
+        reject("Failed");
+    },1000);
+});
+```
+
+Usage:
+
+```javascript
+Promise.race([p1,p2])
+.catch((error)=>{
+    console.log(error);
+});
+```
+
+Output:
+
+```javascript
+Failed
+```
+
+Because rejection occurred first.
+
+---
+
+# Real World Use
+
+API Timeout
+
+Example:
+
+```javascript
+Promise.race([
+    fetch("/users"),
+    timeoutPromise
+]);
+```
+
+If API takes too long,
+
+timeout wins.
+
+Very common pattern.
+
+---
+
+# 3. Promise.allSettled()
+
+Introduced because Promise.all had one problem.
+
+Problem:
+
+```text
+One Promise fails
+↓
+Everything fails
+```
+
+Sometimes we want ALL results regardless of success or failure.
+
+---
+
+# Example
+
+```javascript
+const p1 = Promise.resolve("User");
+
+const p2 = Promise.reject("Server Error");
+
+const p3 = Promise.resolve("Orders");
+```
+
+Using:
+
+```javascript
+Promise.allSettled([p1,p2,p3])
+.then((results)=>{
+    console.log(results);
+});
+```
+
+Output:
+
+```javascript
+[
+  {
+    status: "fulfilled",
+    value: "User"
+  },
+  {
+    status: "rejected",
+    reason: "Server Error"
+  },
+  {
+    status: "fulfilled",
+    value: "Orders"
+  }
+]
+```
+
+---
+
+# Visualization
+
+```text
+User ✓
+
+Server Error ❌
+
+Orders ✓
+
+Return Everything
+```
+
+Nothing is lost.
+
+---
+
+# Real World Example
+
+Dashboard Widgets
+
+```text
+Weather Widget ✓
+
+News Widget ❌
+
+Stock Widget ✓
+```
+
+Still show working widgets.
+
+Don't crash entire page.
+
+---
+
+# 4. Promise.any()
+
+Very common interview question.
+
+---
+
+# What Does It Do?
+
+Returns FIRST SUCCESSFUL Promise.
+
+Ignores failures.
+
+---
+
+# Example
+
+```javascript
+const p1 = Promise.reject("Error 1");
+
+const p2 = Promise.resolve("Success");
+
+const p3 = Promise.resolve("Another Success");
+
+Promise.any([p1,p2,p3])
+.then((result)=>{
+    console.log(result);
+});
+```
+
+Output:
+
+```javascript
+Success
+```
+
+Because first successful Promise wins.
+
+---
+
+# Visualization
+
+```text
+Error 1 ❌
+
+Success ✓
+      ↓
+Winner
+
+Another Success ✓
+```
+
+---
+
+# What If All Fail?
+
+```javascript
+Promise.any([
+    Promise.reject("A"),
+    Promise.reject("B"),
+    Promise.reject("C")
+])
+.catch((error)=>{
+    console.log(error);
+});
+```
+
+Output:
+
+```javascript
+AggregateError
+```
+
+All promises failed.
+
+---
+
+# Difference Between race() and any()
+
+This is asked frequently.
+
+---
+
+## Promise.race()
+
+First settled Promise wins.
+
+```text
+Resolve ✓
+
+Reject ❌
+
+Whichever comes first wins
+```
+
+---
+
+## Promise.any()
+
+First successful Promise wins.
+
+```text
+Reject ❌
+
+Reject ❌
+
+Resolve ✓
+      ↓
+Winner
+```
+
+Failures are ignored.
+
+---
+
+# Comparison Table
+
+| Method               | Success Condition     |
+| -------------------- | --------------------- |
+| Promise.all()        | All must succeed      |
+| Promise.race()       | First settled wins    |
+| Promise.allSettled() | Returns all results   |
+| Promise.any()        | First successful wins |
+
+---
+
+# Interview Question
+
+Predict Output
+
+```javascript
+Promise.all([
+    Promise.resolve(10),
+    Promise.resolve(20)
+])
+.then((data)=>{
+    console.log(data);
+});
+```
+
+Output:
+
+```javascript
+[10,20]
+```
+
+---
+
+# Interview Question
+
+```javascript
+Promise.race([
+    new Promise(resolve =>
+        setTimeout(()=>resolve("A"),3000)
+    ),
+    new Promise(resolve =>
+        setTimeout(()=>resolve("B"),1000)
+    )
+])
+.then(console.log);
+```
+
+Output:
+
+```javascript
+B
+```
+
+---
+
+# Interview Question
+
+```javascript
+Promise.any([
+    Promise.reject("Error"),
+    Promise.resolve("Success")
+])
+.then(console.log);
+```
+
+Output:
+
+```javascript
+Success
+```
+
+---
+
