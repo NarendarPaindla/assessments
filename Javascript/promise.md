@@ -1,5 +1,5 @@
 
-# Promises in JavaScript (Part 1)
+# Promises in JavaScript 
 
 In the previous lesson, we saw Callback Hell:
 
