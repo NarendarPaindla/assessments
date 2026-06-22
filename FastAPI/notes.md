@@ -1,3 +1,6 @@
+
+# Code 1
+
 ```python
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel,Field
